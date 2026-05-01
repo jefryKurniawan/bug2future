@@ -1,39 +1,35 @@
+// tailwind.config.ts
 import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
+        background: "#0B0F19",
+        foreground: "#ffffff",
         fedora: {
-          dark: "#0B0F19",
-          primary: "#3C6EB4",
-          secondary: "#294172",
-          accent: "#5E95E0",
-          text: "#E8E8E8",
-          muted: "#94A3B8",
+          primary: "#a8c8ff",
+          secondary: "#304879",
+          accent: "#419cde",
+          lightBlue: "#5a9fd4",
+          blue: "#306fc3",
+          dark: "#1b263b",
+          darker: "#0d1b2a",
         },
       },
       fontFamily: {
-        mono: ['"Fira Code"', "monospace"],
-        sans: ['"Inter"', "sans-serif"],
-      },
-      animation: {
-        "blink": "blink 1s step-end infinite",
-        "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-      },
-      keyframes: {
-        blink: {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0" },
-        },
+        sans: ["system-ui", "-apple-system", "sans-serif"],
+        mono: ["ui-monospace", "monospace"],
       },
     },
   },
   plugins: [],
 };
+
 export default config;

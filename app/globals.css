@@ -2,49 +2,151 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== CSS Variables for Theme Switching ===== */
 :root {
-  --foreground-rgb: 232, 232, 232;
-  --background-start-rgb: 11, 15, 25;
-  --background-end-rgb: 11, 15, 25;
+  /* Dark Mode Defaults */
+  --bg-primary: #0B0F19;
+  --bg-secondary: #1b263b;
+  --bg-gradient: #0B0F19;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --card-bg: rgba(27, 38, 59, 0.7);
+  --card-border: rgba(48, 111, 195, 0.25);
+  --card-shadow: rgba(48, 111, 195, 0.2);
+  --scrollbar-track: #0d1b2a;
+  --scrollbar-thumb: #306fc3;
+  --fedora-primary: #a8c8ff;
+  --fedora-accent: #419cde;
+  --fedora-lightBlue: #5a9fd4;
+  --fedora-dark: #1b263b;
+  --fedora-darker: #0d1b2a;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
-  overflow-x: hidden;
-  cursor: default;
+/* Light Mode Overrides - COMPLETE */
+html:not(.dark) {
+  --bg-primary: #f0f4f8;
+  --bg-secondary: #ffffff;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(48, 111, 195, 0.15);
+  --card-shadow: rgba(48, 111, 195, 0.08);
+  --scrollbar-track: #d1d9e6;
+  --scrollbar-thumb: #306fc3;
+  --fedora-primary: #306fc3;
+  --fedora-accent: #419cde;
+  --fedora-lightBlue: #5a9fd4;
+  --fedora-dark: #1e293b;
+  --fedora-darker: #0f172a;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-::-webkit-scrollbar-track {
-  background: #0B0F19;
-}
+  /* FIXED: Body background now properly switches */
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #3C6EB4;
-  border-radius: 4px;
-}
+  /* Light mode body override */
+  html:not(.dark) body {
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #5E95E0;
-}
+  /* FIXED: All section backgrounds */
+  section {
+    background: var(--bg-primary);
+    transition: background 0.5s ease;
+  }
 
-.terminal-bg {
-  background-size: 40px 40px;
-  background-image: linear-gradient(to right, rgba(60, 110, 180, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(60, 110, 180, 0.05) 1px, transparent 1px);
-}
+  html:not(.dark) section {
+    background: var(--bg-gradient);
+  }
 
-::selection {
-  background: #3C6EB4;
-  color: #fff;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--fedora-lightBlue);
+  }
+
+  ::selection {
+    background: rgba(48, 111, 195, 0.3);
+    color: var(--text-primary);
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .text-gradient {
+    background: linear-gradient(135deg, var(--fedora-primary) 0%, var(--fedora-accent) 50%, var(--fedora-lightBlue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px var(--card-shadow);
+    transition: all 0.3s ease;
+  }
+
+  .modern-card {
+    background: linear-gradient(135deg, rgba(48, 111, 195, 0.12) 0%, rgba(65, 156, 222, 0.06) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 12px 40px var(--card-shadow);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .text-primary {
+    color: var(--fedora-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  .text-tertiary {
+    color: var(--text-tertiary);
+  }
+
+  .bg-surface {
+    background-color: var(--bg-secondary);
   }
 }

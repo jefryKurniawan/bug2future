@@ -1,38 +1,161 @@
+// components/Navbar.tsx
 "use client";
+
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { Terminal, GitBranch, Link, Send } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Terminal, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const navLinks = [{ name: "About", href: "#about" }, { name: "Experience", href: "#experience" }, { name: "Projects", href: "#projects" }, { name: "Contact", href: "#contact" }];
+
+  const scrollToSection = (href: string) => {
+    // Close mobile menu first
+    setMobileMenuOpen(false);
+    
+    // Handle Home - scroll to top
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    
+    // Handle other sections with offset for fixed navbar
+    const element = document.getElementById(href.replace("#", ""));
+    if (element) {
+      const navbarHeight = 70; // Height of your fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  const navLinks = [
+    { name: "Home", href: "#home" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Contact", href: "#contact" },
+  ];
 
   return (
-    <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} className={`fixed top-0 w-full z-40 transition-all duration-300 ${scrolled ? "bg-fedora-dark/80 backdrop-blur-md border-b border-fedora-secondary" : "bg-transparent"}`}>
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-fedora-dark/90 backdrop-blur-md border-b border-fedora-secondary/50"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2 text-fedora-primary font-mono font-bold text-xl">
-            <Terminal size={24} /><span>jefry@linux:~</span>
-          </div>
+          {/* Logo */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 text-fedora-primary font-mono font-bold text-xl cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <Terminal size={24} />
+            <span className="hidden sm:block">jefry@linux:~</span>
+            <span className="sm:hidden">~</span>
+          </motion.div>
+
+          {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="text-fedora-text hover:text-fedora-accent px-3 py-2 rounded-md text-sm font-medium transition-colors font-mono">./ {link.name}</a>
+                <motion.button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  whileHover={{ y: -2 }}
+                  className="text-fedora-text hover:text-fedora-primary px-3 py-2 rounded-md text-sm font-medium transition-colors font-mono"
+                >
+                  ./ {link.name}
+                </motion.button>
               ))}
             </div>
           </div>
-          <div className="flex gap-4">
-            <a href="https://github.com/jefryKurniawan" target="_blank" className="text-fedora-muted hover:text-fedora-primary transition-colors"><GitBranch size={20} /></a>
-            <a href="https://linkedin.com/in/jefry-kurniawan-7443272aa" target="_blank" className="text-fedora-muted hover:text-fedora-primary transition-colors"><Link size={20} /></a>
-            <a href="mailto:kjefry525@gmail.com" className="text-fedora-muted hover:text-fedora-primary transition-colors"><Send size={20} /></a>
+
+          {/* Right Side: Terminal Icon + Mobile Menu Button */}
+          <div className="flex items-center gap-4">
+            {/* Terminal Icon - Always Visible */}
+            <Terminal className="hidden md:block w-5 h-5 text-fedora-primary" />
+
+            {/* Mobile Menu Button - ONLY visible on mobile */}
+            <motion.button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              whileTap={{ scale: 0.9 }}
+              className="md:hidden p-2 rounded-lg text-fedora-primary hover:bg-fedora-primary/10 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileMenuOpen ? (
+                  <motion.div
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <X size={24} strokeWidth={2.5} />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Menu size={24} strokeWidth={2.5} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-fedora-dark/95 backdrop-blur-md border-t border-fedora-secondary/50 overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navLinks.map((link, index) => (
+                <motion.button
+                  key={link.name}
+                  onClick={() => scrollToSection(link.href)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="block w-full text-left font-mono text-fedora-text hover:text-fedora-primary py-3 px-4 rounded-lg hover:bg-fedora-primary/10 transition-colors"
+                >
+                  <span className="flex items-center gap-3">
+                    <span className="text-fedora-primary">{'>'}</span>
+                    {link.name}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
