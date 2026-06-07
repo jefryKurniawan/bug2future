@@ -2,7 +2,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
-import { useRef, useEffect, useState, useMemo, useCallback } from "react";
+import { useRef, useEffect, useMemo, useCallback } from "react";
 import { Download, Terminal, CheckCircle, Bug, Box, Server, Zap, FileCheck, Layers, ShieldCheck, RefreshCcw, TestTube, Cloud, Quote } from "lucide-react";
 import Image from "next/image";
 
@@ -38,24 +38,9 @@ export default function HeroSection() {
   const cursorX = useSpring(mouseX, { stiffness: prefersReducedMotion ? 0 : 400, damping: 25 });
   const cursorY = useSpring(mouseY, { stiffness: prefersReducedMotion ? 0 : 400, damping: 25 });
   
-  const [displayedName, setDisplayedName] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
   const fullName = "Jefry Kurniawan";
   const quote = "The future cannot be predicted, but futures can be invented.";
   const quoteAuthor = "- Dennis Gabor (1963)";
-
-  // Pre-compute particles
-  const particles = useMemo(() => 
-    Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      left: `${8 + i * 7}%`,
-      top: `${12 + (i % 5) * 15}%`,
-      parallaxFactor: 0.25 + i * 0.03,
-      floatAmount: -12 - i * 1.5,
-      floatDuration: 5 + i * 0.4,
-      floatDelay: i * 0.25,
-      scaleAmount: 1.2 + i * 0.03,
-    })), []);
 
   // Pre-compute tech badges
   const techBadges = useMemo(() => [
@@ -66,66 +51,6 @@ export default function HeroSection() {
     { text: "SQL", icon: Layers, x: "-35px", y: "50%", delay: 1, duration: 5 },
     { text: "UAT", icon: ShieldCheck, x: "-45px", y: "75%", delay: 0.8, duration: 3.8 },
   ], []);
-
-  // Typing animation
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setDisplayedName(fullName);
-      return;
-    }
-    
-    let currentIndex = 0;
-    let isDeleting = false;
-    let animationFrameId: number;
-    let lastTime = 0;
-    const typingSpeed = 80;
-    const deleteSpeed = 40;
-
-    const type = (timestamp: number) => {
-      if (timestamp - lastTime < (isDeleting ? deleteSpeed : typingSpeed)) {
-        animationFrameId = requestAnimationFrame(type);
-        return;
-      }
-      lastTime = timestamp;
-      
-      if (!isDeleting) {
-        if (currentIndex <= fullName.length) {
-          setDisplayedName(fullName.slice(0, currentIndex));
-          currentIndex++;
-          animationFrameId = requestAnimationFrame(type);
-        } else {
-          setTimeout(() => {
-            isDeleting = true;
-            animationFrameId = requestAnimationFrame(type);
-          }, 2000);
-        }
-      } else {
-        if (currentIndex >= 0) {
-          setDisplayedName(fullName.slice(0, currentIndex));
-          currentIndex--;
-          animationFrameId = requestAnimationFrame(type);
-        } else {
-          isDeleting = false;
-          setTimeout(() => {
-            animationFrameId = requestAnimationFrame(type);
-          }, 300);
-        }
-      }
-    };
-    
-    animationFrameId = requestAnimationFrame(type);
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [prefersReducedMotion]);
-
-  // Cursor blink
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      setShowCursor(true);
-      return;
-    }
-    const interval = setInterval(() => setShowCursor(v => !v), 600);
-    return () => clearInterval(interval);
-  }, [prefersReducedMotion]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -172,13 +97,6 @@ export default function HeroSection() {
         <div className="w-full h-full bg-[linear-gradient(to_right,rgba(48,111,195,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.08)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </motion.div>
       
-      {!prefersReducedMotion && particles.map((p) => (
-        <motion.div key={p.id} style={{ x: springX, y: springY, left: p.left, top: p.top }}
-          animate={{ y: [0, p.floatAmount, 0], opacity: [0.15, 0.4, 0.15] }}
-          transition={{ duration: p.floatDuration, repeat: Infinity, ease: "easeInOut", delay: p.floatDelay, repeatType: "reverse" }}
-          className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-fedora-primary/60 rounded-full" />
-      ))}
-      
       <motion.div style={{ y: prefersReducedMotion ? 0 : springY }} 
         animate={{ scale: prefersReducedMotion ? 1 : [1, 1.2, 1], opacity: prefersReducedMotion ? 0.15 : [0.1, 0.2, 0.15] }} 
         transition={{ duration: 10, repeat: Infinity }} 
@@ -207,10 +125,7 @@ export default function HeroSection() {
           
           <div className="space-y-3 md:space-y-4">
             <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient leading-tight">
-              {displayedName}
-              {!prefersReducedMotion && (
-                <span className={`inline-block w-1 md:w-2 h-8 md:h-12 ml-1 bg-fedora-primary align-middle ${showCursor ? 'opacity-100' : 'opacity-0'}`} />
-              )}
+              {fullName}
             </h1>
 
             <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} 
@@ -235,9 +150,9 @@ export default function HeroSection() {
               className="bg-fedora-primary text-fedora-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-fedora-lightBlue transition-colors flex items-center gap-2">
               <Terminal className="w-4 h-4" /> ./contact.sh
             </motion.button>
-            <motion.a href="/CV-Jk.pdf" download whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
+            <motion.a href="/resume-jefryK.pdf" download whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
               className="glass text-fedora-primary px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-fedora-primary/10 transition-colors flex items-center gap-2 border border-fedora-primary/25">
-              <Download className="w-4 h-4" /> CV.pdf
+              <Download className="w-4 h-4" /> Resume
             </motion.a>
           </motion.div>
         </motion.div>
