@@ -1,8 +1,8 @@
 // components/ProjectsSection.tsx
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { useRef, useState, useEffect, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
 import { 
   Github, ExternalLink, FolderGit2, 
@@ -171,11 +171,6 @@ const projectSections = [
 export default function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
-  const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
-  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -184,21 +179,7 @@ export default function ProjectsSection() {
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const headerScale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
-  
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((clientX / innerWidth - 0.5) * 3);
-      mouseY.set((clientY / innerHeight - 0.5) * 3);
-    };
-    
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
+  const blobY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
     <section
@@ -210,39 +191,13 @@ export default function ProjectsSection() {
       <motion.div style={{ y: bgY }} className="absolute inset-0 bg-gradient-to-b from-brand-darker via-brand-dark to-background" />
       
       <motion.div 
-        style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
-        className="absolute inset-0 opacity-20"
-      >
-        <div className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(184,58,58,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(184,58,58,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </motion.div>
-      
-      {[...Array(15)].map((_, i) => (
-        <motion.div
-          key={i}
-          style={{
-            x: isTouchDevice ? 0 : springX,
-            y: isTouchDevice ? 0 : springY,
-            left: `${5 + i * 6}%`,
-            top: `${10 + (i % 5) * 18}%`,
-          }}
-          animate={{
-            y: [0, -20 - i, 0],
-            opacity: [0.1, 0.4, 0.1],
-            scale: [1, 1.3, 1],
-          }}
-          transition={{ duration: 6 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-          className="absolute w-1.5 h-1.5 bg-brand-primary rounded-full"
-        />
-      ))}
-      
-      <motion.div 
-        style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
+        style={{ y: blobY }}
         animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 8, repeat: Infinity }}
         className="absolute top-10 left-10 w-72 h-72 md:w-96 md:h-96 bg-brand-primary/15 rounded-full blur-[120px]"
       />
       <motion.div 
-        style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
+        style={{ y: blobY }}
         animate={{ scale: [1.3, 1, 1.3], opacity: [0.06, 0.15, 0.06] }}
         transition={{ duration: 10, repeat: Infinity, delay: 1.5 }}
         className="absolute bottom-10 right-10 w-80 h-80 md:w-[28rem] md:h-[28rem] bg-brand-accent/10 rounded-full blur-[140px]"
@@ -266,7 +221,7 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {projectSections.map((section, sIdx) => (
+        {projectSections.map((section) => (
           <div key={section.title} className="mb-16 md:mb-20 last:mb-0">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
@@ -340,6 +295,17 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
       </div>
       
       <p className="text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">{project.desc}</p>
+      
+      <div className="flex items-center gap-3 mb-4 text-xs font-mono text-secondary">
+        <span className="flex items-center gap-1">
+          <Github className="w-3.5 h-3.5" />
+          <span>42</span>
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="text-brand-primary">⑂</span>
+          <span>7</span>
+        </span>
+      </div>
       
       <div className="flex flex-wrap gap-2">
         {project.tags.map((tag) => (

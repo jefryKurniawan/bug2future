@@ -3,11 +3,14 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Terminal, Menu, X } from "lucide-react";
+import { Terminal, Menu, X, Sun, Moon } from "lucide-react";
+import { useStore } from "@/hooks/useStore";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const theme = useStore((s) => s.theme);
+  const toggleTheme = useStore((s) => s.toggleTheme);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -40,10 +43,12 @@ export default function Navbar() {
 
   const navLinks = [
     { name: "Home", href: "#home" },
+    { name: "QA Dashboard", href: "#qa-dashboard" },
+    { name: "Bugs", href: "#bug-gallery" },
+    { name: "Test Runner", href: "#test-runner" },
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
-    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -86,8 +91,19 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Right Side: Terminal Icon + Mobile Menu Button */}
+          {/* Right Side: Theme Toggle + Terminal Icon + Mobile Menu Button */}
           <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+            <motion.button
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className="p-2 rounded-lg text-secondary hover:text-brand-primary hover:bg-brand-primary/10 transition-all"
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </motion.button>
+
             {/* Terminal Icon - Always Visible */}
             <Terminal className="hidden md:block w-5 h-5 text-brand-primary" />
 

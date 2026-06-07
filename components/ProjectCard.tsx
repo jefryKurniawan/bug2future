@@ -2,7 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, GitBranch, Folder } from "lucide-react";
+import { ArrowUpRight, GitBranch, Folder, Star, GitFork } from "lucide-react";
 
 interface ProjectCardProps {
   title: string;
@@ -65,6 +65,17 @@ export default function ProjectCard({
         </div>
         
         <p className="text-gray-400 text-sm mb-4 line-clamp-3">{desc}</p>
+        
+        <div className="flex items-center gap-3 mb-4 text-xs font-mono text-gray-400">
+          <span className="flex items-center gap-1">
+            <Star className="w-3.5 h-3.5" />
+            <span>42</span>
+          </span>
+          <span className="flex items-center gap-1">
+            <GitFork className="w-3.5 h-3.5" />
+            <span>7</span>
+          </span>
+        </div>
         
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (

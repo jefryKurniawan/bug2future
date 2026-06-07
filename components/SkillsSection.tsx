@@ -11,107 +11,16 @@ import {
 } from "framer-motion";
 import { useRef, useState, useMemo } from "react";
 import { Wrench, Code, Shield, Terminal, Database, ChevronRight, Sparkles } from "lucide-react";
+import { skillCategories, levelConfig, type SkillLevel } from "@/data/skills";
 
-type SkillLevel = "core" | "advanced" | "familiar";
-
-interface SkillItem {
-  name: string;
-  level: SkillLevel;
-  description?: string;
-}
-
-interface SkillCategory {
-  id: string;
-  label: string;
-  icon: React.ElementType;
-  skills: SkillItem[];
-  terminalCmd: string;
-  gradient: string;
-}
-
-const skillCategories: SkillCategory[] = [
-  {
-    id: "qa-core",
-    label: "QA_Core",
-    icon: Shield,
-    terminalCmd: "sudo pacman -S qa-essentials",
-    gradient: "from-[#DB7070]/20 via-[#D94A4A]/10 to-transparent",
-    skills: [
-      { name: "Playwright", level: "core", description: "E2E Automation" },
-      { name: "Cypress", level: "core", description: "Frontend Testing" },
-      { name: "k6", level: "advanced", description: "Load Testing" },
-      { name: "Postman", level: "core", description: "API Testing + Newman" },
-      { name: "Appium", level: "familiar", description: "Mobile Testing" },
-      { name: "WebdriverIO", level: "familiar", description: "WDIO Framework" },
-      { name: "Jest", level: "familiar", description: "Unit & Integration Testing" },
-      { name: "Manual Testing", level: "core", description: "Test Case, UAT, Regression" },
-      { name: "Bug Reporting", level: "core", description: "JIRA, Freshdesk, SQL Logs" },
-    ],
-  },
-  {
-    id: "dev-stack",
-    label: "Dev_Stack",
-    icon: Code,
-    terminalCmd: "sudo pacman -S --needed base-devel",
-    gradient: "from-[#C86464]/20 via-[#D94A4A]/10 to-transparent",
-    skills: [
-      { name: "JavaScript", level: "core", description: "ES6+, Async/Await" },
-      { name: "TypeScript", level: "familiar", description: "Type Safety, Generics" },
-      { name: "Node.js", level: "familiar", description: "Express, REST API" },
-      { name: "Next.js", level: "familiar", description: "App Router, SSR" },
-      { name: "React", level: "familiar", description: "Hooks, Context, TSX" },
-      { name: "Laravel", level: "familiar", description: "MVC, Blade, Eloquent" },
-      { name: "Tailwind CSS", level: "core", description: "Utility-First, Responsive" },
-      { name: "Firebase", level: "familiar", description: "Auth, Firestore, Hosting" },
-      { name: "PHP", level: "familiar", description: "Laravel, Blade" },
-      { name: "Python", level: "familiar", description: "Scripting, Automation" },
-      { name: "SQL", level: "familiar", description: "Queries, Joins, Subqueries" },
-    ],
-  },
-  {
-    id: "tools",
-    label: "Tools",
-    icon: Terminal,
-    terminalCmd: "git clone https://github.com/jefryKurniawan/dotfiles",
-    gradient: "from-[#ffb95d]/20 via-[#ff9f43]/10 to-transparent",
-    skills: [
-      { name: "GitHub Actions", level: "core", description: "CI/CD Pipeline" },
-      { name: "Git", level: "core", description: "Branching, Rebase, Hooks" },
-      { name: "Linux CLI", level: "core", description: "Bash, Podman, Systemd" },
-      { name: "OWASP ZAP", level: "familiar", description: "Security Scanning" },
-
-      { name: "Browser DevTools", level: "core", description: "Debugging, Network, Console" },
-      { name: "Podman", level: "familiar", description: "Container Management" },
-      { name: "JIRA", level: "core", description: "Agile, Sprint Tracking" },
-    ],
-  },
-  {
-    id: "infra",
-    label: "Infra",
-    icon: Database,
-    terminalCmd: "podman run -d --name db postgres:latest",
-    gradient: "from-[#E07A5F]/20 via-[#C0392B]/10 to-transparent",
-    skills: [
-      { name: "MySQL", level: "advanced", description: "Query Optimization, ERD" },
-      { name: "PostgreSQL", level: "familiar", description: "Basic CRUD, Migration" },
-      { name: "Azure", level: "familiar", description: "Fundamentals, Cloud Concepts" },
-      { name: "Arch Linux", level: "core", description: "Daily Driver, CachyOS, Pacman" },
-      { name: "Debian", level: "familiar", description: "Server Setup, APT" },
-
-    ],
-  },
-];
-
-const levelColorValues: Record<SkillLevel, { hex: string; rgba: string; label: string; pulse: string }> = {
-  core: { hex: "#DB7070", rgba: "rgba(219, 112, 112, 0.5)", label: "Expert", pulse: "0 0 20px rgba(219, 112, 112, 0.3)" },
-  advanced: { hex: "#C86464", rgba: "rgba(200, 100, 100, 0.5)", label: "Proficient", pulse: "0 0 20px rgba(200, 100, 100, 0.3)" },
-  familiar: { hex: "#E8A84C", rgba: "rgba(232, 168, 76, 0.5)", label: "Learning", pulse: "0 0 20px rgba(232, 168, 76, 0.3)" },
+const iconMap: Record<string, React.ElementType> = {
+  Shield, Code, Terminal, Database,
 };
 
-const levelConfig: Record<SkillLevel, { bgClass: string; label: string }> = {
-  core: { bgClass: "bg-[#DB7070]", label: "Expert" },
-  advanced: { bgClass: "bg-[#C86464]", label: "Proficient" },
-  familiar: { bgClass: "bg-[#E8A84C]", label: "Learning" },
+const levelColorValues: Record<SkillLevel, { hex: string; rgba: string; label: string; pulse: string }> = {
+  core: { hex: levelConfig.core.hex, rgba: "rgba(219, 112, 112, 0.5)", label: levelConfig.core.label, pulse: "0 0 20px rgba(219, 112, 112, 0.3)" },
+  advanced: { hex: levelConfig.advanced.hex, rgba: "rgba(200, 100, 100, 0.5)", label: levelConfig.advanced.label, pulse: "0 0 20px rgba(200, 100, 100, 0.3)" },
+  familiar: { hex: levelConfig.familiar.hex, rgba: "rgba(232, 168, 76, 0.5)", label: levelConfig.familiar.label, pulse: "0 0 20px rgba(232, 168, 76, 0.3)" },
 };
 
 const containerVariants: Variants = {
@@ -259,7 +168,7 @@ export default function SkillsSection() {
           className="flex flex-wrap gap-1.5 mb-8 border-b border-outline-variant/60"
         >
           {skillCategories.map((category) => {
-            const Icon = category.icon;
+            const Icon = iconMap[category.icon];
             const isActive = activeTab === category.id;
             
             return (
@@ -306,7 +215,6 @@ export default function SkillsSection() {
               className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-4 relative z-10"
             >
               {activeCategory.skills.map((skill) => {
-                const config = levelConfig[skill.level];
                 const colorVal = levelColorValues[skill.level];
                 
                 return (
@@ -323,7 +231,7 @@ export default function SkillsSection() {
                       className={`bg-surface/90 border border-outline-variant/60 rounded-xl p-2.5 md:p-5 cursor-default flex items-center gap-2 md:gap-3.5 transition-all duration-400 hover:border-primary/70 hover:bg-surface-container/80 backdrop-blur-sm`}
                     >
                       <motion.div
-                        className={`w-3 h-3 rounded-full ${config.bgClass} relative flex-shrink-0`}
+                        className="w-3 h-3 rounded-full relative flex-shrink-0"
                         style={{ backgroundColor: colorVal.hex }}
                         animate={{ boxShadow: [`0 0 0 0 ${colorVal.rgba}`, `0 0 0 10px ${colorVal.rgba.replace("0.5", "0")}`, `0 0 0 0 ${colorVal.rgba}`] }}
                         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
@@ -357,10 +265,10 @@ export default function SkillsSection() {
             transition={{ delay: 0.7 }}
             className="mt-10 pt-7 border-t border-outline-variant/40 flex flex-wrap gap-5 text-xs font-mono"
           >
-            {Object.entries(levelConfig).map(([key, { bgClass, label }]) => (
+            {Object.entries(levelConfig).map(([key, config]) => (
               <motion.div key={key} className="flex items-center gap-2.5 text-on-surface-variant/80" whileHover={{ scale: 1.05, color: "#B83A3A" }} transition={{ duration: 0.2 }}>
-                <motion.div className={`w-2.5 h-2.5 rounded-full ${bgClass}`} animate={{ boxShadow: [`0 0 0 0 ${levelColorValues[key as SkillLevel].rgba}`, `0 0 0 6px ${levelColorValues[key as SkillLevel].rgba.replace("0.5", "0")}`] }} transition={{ duration: 2, repeat: Infinity }} />
-                <span>{label}</span>
+                <motion.div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: config.hex }} animate={{ boxShadow: [`0 0 0 0 ${levelColorValues[key as SkillLevel].rgba}`, `0 0 0 6px ${levelColorValues[key as SkillLevel].rgba.replace("0.5", "0")}`] }} transition={{ duration: 2, repeat: Infinity }} />
+                <span>{config.label}</span>
               </motion.div>
             ))}
           </motion.div>
