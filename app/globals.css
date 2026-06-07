@@ -53,6 +53,17 @@ html:not(.dark) {
   --brand-warm: #E07A5F;
   --brand-dark: #1A1A1A;
   --brand-darker: #0A0A0A;
+  --surface-elevated: #f3f4f6;
+  --border-muted: #d1d5db;
+  --text-heading: #1f2937;
+  --text-muted: #6b7280;
+  --text-label: #4b5563;
+  --text-dim: #9ca3af;
+  --placeholder: #9ca3af;
+  --success: #22c55e;
+  --section-start: #FAFAFA;
+  --section-mid: #F5F0F0;
+  --section-end: #FAFAFA;
 }
 
 @layer base {

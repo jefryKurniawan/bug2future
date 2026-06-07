@@ -37,7 +37,7 @@ export default function ProjectCard({
       
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-white font-mono">{title}</h3>
+          <h3 className="text-xl font-bold text-[var(--text-heading)] font-mono">{title}</h3>
           <div className="flex gap-4">
             {repo && (
               <a
@@ -45,7 +45,7 @@ export default function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${title} repository on GitHub`}
-                className="text-gray-400 hover:text-brand-primary transition-colors"
+                className="text-[var(--text-muted)] hover:text-brand-primary transition-colors"
               >
                 <GitBranch size={20} />
               </a>
@@ -56,7 +56,7 @@ export default function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Open ${title} website`}
-                className="text-gray-400 hover:text-brand-primary transition-colors"
+                className="text-[var(--text-muted)] hover:text-brand-primary transition-colors"
               >
                 <ArrowUpRight size={20} />
               </a>
@@ -64,9 +64,9 @@ export default function ProjectCard({
           </div>
         </div>
         
-        <p className="text-gray-400 text-sm mb-4 line-clamp-3">{desc}</p>
+        <p className="text-[var(--text-muted)] text-sm mb-4 line-clamp-3">{desc}</p>
         
-        <div className="flex items-center gap-3 mb-4 text-xs font-mono text-gray-400">
+        <div className="flex items-center gap-3 mb-4 text-xs font-mono text-[var(--text-muted)]">
           <span className="flex items-center gap-1">
             <Star className="w-3.5 h-3.5" />
             <span>42</span>

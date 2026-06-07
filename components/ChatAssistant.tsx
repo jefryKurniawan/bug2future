@@ -96,12 +96,12 @@ export default function ChatAssistant() {
             <div className="flex items-center justify-between px-4 py-3 border-b border-brand-secondary/20 bg-brand-dark/50">
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5 text-brand-primary" />
-                <span className="font-mono text-sm text-white font-bold">QA Assistant</span>
+                <span className="font-mono text-sm text-[var(--text-heading)] font-bold">QA Assistant</span>
               </div>
               <motion.button
                 onClick={() => setOpen(false)}
                 whileHover={{ scale: 1.1 }}
-                className="p-1 rounded-lg text-secondary hover:text-white transition-colors"
+                className="p-1 rounded-lg text-secondary hover:text-[var(--text-primary)] transition-colors"
               >
                 <X className="w-5 h-5" />
               </motion.button>
@@ -115,7 +115,7 @@ export default function ChatAssistant() {
                     className={`max-w-[80%] px-3 py-2 rounded-xl text-sm font-mono ${
                       msg.role === "user"
                         ? "bg-brand-primary text-white rounded-tr-sm"
-                        : "bg-brand-secondary/20 text-white/90 rounded-tl-sm"
+                        : "bg-brand-secondary/20 text-[var(--text-primary)]/90 rounded-tl-sm"
                     }`}
                   >
                     {msg.text}
@@ -149,7 +149,7 @@ export default function ChatAssistant() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => { if (e.key === "Enter") handleSend(); }}
                 placeholder="Ask me anything..."
-                className="flex-1 bg-brand-secondary/20 text-white placeholder:text-secondary/50 text-sm font-mono px-3 py-2 rounded-xl border border-brand-secondary/30 focus:outline-none focus:border-brand-primary/50 transition-colors"
+                className="flex-1 bg-brand-secondary/20 text-[var(--text-primary)] placeholder:text-secondary/50 text-sm font-mono px-3 py-2 rounded-xl border border-brand-secondary/30 focus:outline-none focus:border-brand-primary/50 transition-colors"
               />
               <motion.button
                 onClick={handleSend}

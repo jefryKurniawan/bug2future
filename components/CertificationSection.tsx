@@ -15,7 +15,7 @@ export default function CertificationSection() {
   return (
     <section ref={sectionRef} id="certifications" className="py-24 md:py-32 px-4 md:px-8 lg:px-16 bg-background relative overflow-hidden">
       {/* Background gradient */}
-      <motion.div style={{ y: bgGradientY }} className="absolute inset-0 bg-gradient-to-b from-background via-[#1a1d24]/80 to-background" />
+      <motion.div style={{ y: bgGradientY }} className="absolute inset-0 bg-gradient-to-b from-background via-[var(--section-mid)] to-background" />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}

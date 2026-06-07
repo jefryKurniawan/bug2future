@@ -65,7 +65,7 @@ export default function DashboardMetrics() {
                 key={value}
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="block text-2xl md:text-3xl font-bold font-mono text-white"
+                className="block text-2xl md:text-3xl font-bold font-mono text-[var(--text-heading)]"
               >
                 {loading ? (
                   <motion.span

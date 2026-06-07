@@ -37,7 +37,7 @@ export default function ExperienceSection() {
             <Briefcase className="w-9 h-9 text-brand-primary" />
           </motion.div>
           <div>
-            <h2 className="text-3xl md:text-5xl font-bold text-white">Experience</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-[var(--text-heading)]">Experience</h2>
             <p className="text-secondary text-sm md:text-base mt-2 font-mono">Professional journey & growth</p>
           </div>
           <div className="flex-1 h-px bg-gradient-to-r from-brand-primary/60 to-transparent" />
@@ -117,13 +117,13 @@ function ExperienceCard({ experience, index, scrollYProgress }: {
         
         <div className="flex flex-col md:flex-row md:justify-between gap-5 mb-7">
           <div className="space-y-3">
-            <h3 className={`text-xl md:text-2.5xl font-bold ${experience.current ? "text-brand-primary" : "text-white"}`}>{experience.title}</h3>
+            <h3 className={`text-xl md:text-2.5xl font-bold ${experience.current ? "text-brand-primary" : "text-[var(--text-heading)]"}`}>{experience.title}</h3>
             <p className="text-brand-accent font-semibold">{experience.company}</p>
             <div className="flex items-center gap-2.5 text-sm text-secondary">
               <MapPin className="w-4.5 h-4.5" /> {experience.location}
             </div>
           </div>
-          <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-brand-dark/85 border border-brand-primary/25 font-mono text-xs text-brand-lightBlue">
+          <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-brand-dark/85 border border-brand-primary/25 font-mono text-xs text-[var(--text-label)]">
             <Calendar className="w-4.5 h-4.5" /> {experience.period}
           </div>
         </div>

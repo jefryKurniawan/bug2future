@@ -147,7 +147,7 @@ export default function HeroSection() {
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="flex flex-wrap gap-3 md:gap-4">
             <motion.button onClick={handleContactClick} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
-              className="bg-brand-primary text-brand-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-lightBlue transition-colors flex items-center gap-2">
+              className="bg-brand-primary text-brand-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-accent transition-colors flex items-center gap-2">
               <Terminal className="w-4 h-4" /> ./contact.sh
             </motion.button>
             <motion.a href="/resume-jefryK.pdf" download whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
@@ -176,12 +176,12 @@ export default function HeroSection() {
 
           <motion.div animate={{ y: prefersReducedMotion ? [0, -6, 0] : [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} 
             className="absolute top-5 right-8 glass px-3 py-2 rounded-lg border border-brand-primary/25">
-            <div className="flex items-center gap-1.5"><Bug className="w-3.5 h-3.5 text-red-400" /><span className="font-mono text-[10px] text-brand-lightBlue">0 Bugs</span></div>
+            <div className="flex items-center gap-1.5"><Bug className="w-3.5 h-3.5 text-red-400" /><span className="font-mono text-[10px] text-[var(--text-label)]">0 Bugs</span></div>
           </motion.div>
           
           <motion.div animate={{ y: prefersReducedMotion ? [0, 6, 0] : [0, 10, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 0.8 }} 
             className="absolute bottom-5 left-8 glass px-3 py-2 rounded-lg border border-brand-primary/25">
-            <div className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-green-400" /><span className="font-mono text-[10px] text-brand-lightBlue">All Pass</span></div>
+            <div className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-green-400" /><span className="font-mono text-[10px] text-[var(--text-label)]">All Pass</span></div>
           </motion.div>
           
           <motion.div animate={{ y: prefersReducedMotion ? [0, -5, 0] : [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 0.4 }} 

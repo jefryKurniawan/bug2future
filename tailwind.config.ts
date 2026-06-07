@@ -11,16 +11,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0B0F19",
-        foreground: "#ffffff",
+        background: "var(--bg-primary)",
+        foreground: "var(--text-primary)",
         brand: {
           primary: "#B83A3A",
           secondary: "#8B2020",
           accent: "#D94A4A",
           warm: "#E07A5F",
           deep: "#C0392B",
-          dark: "#1A0E0E",
-          darker: "#0A0505",
+          dark: "var(--brand-dark)",
+          darker: "var(--brand-darker)",
         },
       },
       fontFamily: {

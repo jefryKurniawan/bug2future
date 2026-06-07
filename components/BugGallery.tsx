@@ -123,7 +123,7 @@ export default function BugGallery() {
                       <SevIcon className={`w-5 h-5 ${severityColor[bug.severity].split(" ")[0]}`} />
                       <div>
                         <span className="text-xs font-mono text-brand-primary">{bug.id}</span>
-                        <h3 className="text-sm font-bold text-white font-mono group-hover:text-brand-primary transition-colors">
+                        <h3 className="text-sm font-bold text-[var(--text-heading)] font-mono group-hover:text-brand-primary transition-colors">
                           {bug.title}
                         </h3>
                       </div>
@@ -161,7 +161,7 @@ export default function BugGallery() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedBug(null)}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
+              className="fixed inset-0 bg-[var(--bg-primary)]/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -178,20 +178,20 @@ export default function BugGallery() {
                 <motion.button
                   onClick={() => setSelectedBug(null)}
                   whileHover={{ scale: 1.1 }}
-                  className="p-1 rounded-lg text-secondary hover:text-white hover:bg-brand-primary/10 transition-all"
+                  className="p-1 rounded-lg text-secondary hover:text-[var(--text-primary)] hover:bg-brand-primary/10 transition-all"
                 >
                   <X className="w-5 h-5" />
                 </motion.button>
               </div>
               <div className="p-5 space-y-4">
-                <h3 className="text-lg font-bold text-white font-mono">{selectedBug.title}</h3>
+                <h3 className="text-lg font-bold text-[var(--text-heading)] font-mono">{selectedBug.title}</h3>
                 <p className="text-sm text-secondary leading-relaxed">{selectedBug.description}</p>
 
                 <div>
                   <span className="text-xs font-mono text-secondary/70 uppercase block mb-2">Steps to Reproduce</span>
                   <ol className="list-decimal list-inside space-y-1">
                     {selectedBug.steps.map((step, i) => (
-                      <li key={i} className="text-sm text-white/80 font-mono">
+                      <li key={i} className="text-sm text-[var(--text-primary)] opacity-80 font-mono">
                         {step}
                       </li>
                     ))}
@@ -215,11 +215,11 @@ export default function BugGallery() {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-secondary/70 font-mono">Environment:</span>
-                    <span className="text-xs text-white font-mono">{selectedBug.environment}</span>
+                    <span className="text-xs text-[var(--text-primary)] font-mono">{selectedBug.environment}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-secondary/70 font-mono">Reported:</span>
-                    <span className="text-xs text-white font-mono">{selectedBug.date}</span>
+                    <span className="text-xs text-[var(--text-primary)] font-mono">{selectedBug.date}</span>
                   </div>
                 </div>
               </div>

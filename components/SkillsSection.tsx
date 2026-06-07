@@ -96,7 +96,7 @@ export default function SkillsSection() {
       {/* Background gradient */}
       <motion.div 
         style={{ y: bgGradientY, opacity: bgOpacity }}
-        className="absolute inset-0 bg-gradient-to-b from-background via-[#1a1d24] to-background"
+        className="absolute inset-0 bg-gradient-to-b from-background via-[var(--section-mid)] to-background"
       />
 
       {/* Grid */}

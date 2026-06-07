@@ -231,7 +231,7 @@ export default function ProjectsSection() {
             >
               <FolderGit2 className="w-5 h-5 text-brand-primary" />
               <span className="text-brand-primary">&gt;</span>
-              <span className="text-white font-bold">{section.cmd}</span>
+              <span className="text-[var(--text-heading)] font-bold">{section.cmd}</span>
               <span className="text-secondary text-xs hidden sm:inline">({section.items.length} items)</span>
             </motion.div>
 
@@ -266,7 +266,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
           <div className="p-2 rounded-lg bg-brand-primary/10 border border-brand-primary/20 flex-shrink-0">
             <project.icon className="w-5 h-5 text-brand-primary" />
           </div>
-          <h3 className="text-base md:text-lg font-bold text-white font-mono group-hover:text-brand-primary transition-colors truncate">
+          <h3 className="text-base md:text-lg font-bold text-[var(--text-heading)] font-mono group-hover:text-brand-primary transition-colors truncate">
             {project.name}
           </h3>
         </div>

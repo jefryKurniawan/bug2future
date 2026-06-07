@@ -19,7 +19,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <div className="text-center">
           <Terminal className="w-12 h-12 text-brand-primary mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-white mb-2">Project not found</h1>
+          <h1 className="text-2xl font-bold text-[var(--text-heading)] mb-2">Project not found</h1>
           <p className="text-secondary mb-6">The project &quot;{slug}&quot; does not exist.</p>
           <Link
             href="/#projects"
@@ -49,7 +49,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
             <Icon className="w-7 h-7 text-brand-primary" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-4xl font-bold text-white">{project.name}</h1>
+            <h1 className="text-2xl md:text-4xl font-bold text-[var(--text-heading)]">{project.name}</h1>
             <p className="text-secondary text-sm md:text-base mt-1">{project.desc}</p>
           </div>
         </div>
