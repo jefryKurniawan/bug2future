@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect } from "react";
-import { Terminal, RefreshCcw, Bug, ShieldCheck, TestTube, BarChart3 } from "lucide-react";
+import { Terminal, Bug, ShieldCheck, TestTube, BarChart3 } from "lucide-react";
 import { useStore } from "@/hooks/useStore";
 
 const metricIcons = {
@@ -88,29 +88,6 @@ export default function DashboardMetrics() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <motion.button
-            onClick={refresh}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-primary text-white font-mono text-sm hover:bg-brand-accent transition-colors"
-          >
-            <motion.span
-              animate={loading ? { rotate: 360 } : {}}
-              transition={loading ? { duration: 1, repeat: Infinity, ease: "linear" } : {}}
-              style={{ display: "inline-flex" }}
-            >
-              <RefreshCcw className="w-4 h-4" />
-            </motion.span>
-            Refresh Metrics
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );
