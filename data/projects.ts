@@ -22,6 +22,7 @@ export const fullstackProjects: FullstackProject[] = [
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/sim-mts-hasanuddin",
     iconName: "School",
+    sectionCmd: "fullstack_projects",
     screenshots: [
       "/mts/beranda.png",
       "/mts/dashboard.png",
@@ -40,6 +41,7 @@ export const fullstackProjects: FullstackProject[] = [
     tags: ["React", "TypeScript", "Laravel"],
     repo: "https://github.com/jefryKurniawan/axia-orto",
     iconName: "Globe",
+    sectionCmd: "fullstack_projects",
     screenshots: [
       "/klinik/beranda.png",
       "/klinik/dashboard.png",
@@ -55,6 +57,7 @@ export const fullstackProjects: FullstackProject[] = [
     tags: ["Laravel", "ERP", "MySQL"],
     repo: "https://github.com/jefryKurniawan/ksp-erp",
     iconName: "Building2",
+    sectionCmd: "fullstack_projects",
     screenshots: [
       "/ksp/Login-KSP-ERP.png",
       "/ksp/Dashboard-KSP-ERP.png",
@@ -174,6 +177,7 @@ npx expo start --tunnel</code></pre>
     tags: ["React Native", "Expo", "FastAPI", "AI"],
     repo: "https://github.com/jefryKurniawan/TandurAI",
     iconName: "TreePine",
+    sectionCmd: "fullstack_projects",
     screenshots: [],
   },
   {
@@ -186,6 +190,7 @@ npx expo start --tunnel</code></pre>
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/al-ikhlas-mosque",
     iconName: "Church",
+    sectionCmd: "fullstack_projects",
     screenshots: [],
     video: "/masjid/al-ikhlas-gonggang.webm",
   },
@@ -199,6 +204,7 @@ npx expo start --tunnel</code></pre>
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/laundry",
     iconName: "Shirt",
+    sectionCmd: "fullstack_projects",
     screenshots: [
       "/laundry/home-2.png",
       "/laundry/order.png",
