@@ -117,9 +117,9 @@ export default function HeroSection() {
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full relative z-10 max-w-7xl mx-auto">
         
-        <motion.div style={{ y: contentY, opacity: contentOpacity }} className="flex flex-col items-start gap-4 md:gap-6">
+        <motion.div style={{ y: contentY, opacity: contentOpacity }} className="flex flex-col items-center sm:items-start gap-4 md:gap-6">
           
-          <div className="space-y-3 md:space-y-4">
+          <div className="space-y-3 md:space-y-4 text-center sm:text-left">
             <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient leading-[1.15] pb-1 md:pb-2">
               {fullName}
             </h1>
