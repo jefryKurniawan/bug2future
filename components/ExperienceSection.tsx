@@ -36,6 +36,16 @@ const experiences = [
     current: false,
     highlight: "Full Stack Foundation",
   },
+  {
+    title: "Data Entry",
+    company: "PAYONESIA",
+    location: "Yogyakarta, Indonesia",
+    period: "May 2021 – Apr 2022",
+    description: "Data entry and administrative support for fintech operations, ensuring accurate data processing and record management.",
+    skills: ["Data Entry", "Excel", "Administration"],
+    current: false,
+    highlight: "Fintech Operations",
+  },
 ];
 
 export default function ExperienceSection() {

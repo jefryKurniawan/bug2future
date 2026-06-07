@@ -43,6 +43,7 @@ const skillCategories: SkillCategory[] = [
       { name: "Postman", level: "core", description: "API Testing + Newman" },
       { name: "Appium", level: "familiar", description: "Mobile Testing" },
       { name: "WebdriverIO", level: "familiar", description: "WDIO Framework" },
+      { name: "Jest", level: "familiar", description: "Unit & Integration Testing" },
       { name: "Manual Testing", level: "core", description: "Test Case, UAT, Regression" },
       { name: "Bug Reporting", level: "core", description: "JIRA, Freshdesk, SQL Logs" },
     ],
@@ -62,6 +63,9 @@ const skillCategories: SkillCategory[] = [
       { name: "Laravel", level: "familiar", description: "MVC, Blade, Eloquent" },
       { name: "Tailwind CSS", level: "core", description: "Utility-First, Responsive" },
       { name: "Firebase", level: "familiar", description: "Auth, Firestore, Hosting" },
+      { name: "PHP", level: "familiar", description: "Laravel, Blade" },
+      { name: "Python", level: "familiar", description: "Scripting, Automation" },
+      { name: "SQL", level: "familiar", description: "Queries, Joins, Subqueries" },
     ],
   },
   {
@@ -282,7 +286,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="bg-surface/80 backdrop-blur-sm border border-outline-variant/60 rounded-2xl p-6 md:p-9 relative"
+          className="bg-surface/80 backdrop-blur-sm border border-outline-variant/60 rounded-2xl p-4 md:p-6 relative"
         >
           <motion.div
             key={`glow-${activeTab}`}
@@ -328,7 +332,7 @@ export default function SkillsSection() {
                       </motion.div>
                       
                       <div className="flex-1 min-w-0">
-                        <motion.span className="font-mono text-sm text-on-surface block truncate font-medium" whileHover={{ color: "#a8c8ff" }} transition={{ duration: 0.2 }}>{skill.name}</motion.span>
+                        <motion.span className="font-mono text-sm text-on-surface block font-medium" whileHover={{ color: "#a8c8ff" }} transition={{ duration: 0.2 }}>{skill.name}</motion.span>
                         {skill.description && (
                           <motion.span className="font-code-sm text-xs text-on-surface-variant/70 hidden group-hover:flex absolute -bottom-8 left-1/2 -translate-x-1/2 bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/80 whitespace-nowrap z-30 shadow-xl shadow-black/30 backdrop-blur-md" initial={{ opacity: 0, y: 10, scale: 0.95 }} whileHover={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.15 }}>{skill.description}</motion.span>
                         )}

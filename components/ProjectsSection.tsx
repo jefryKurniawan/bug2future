@@ -1,70 +1,170 @@
 // components/ProjectsSection.tsx
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect, useMemo } from "react";
 import { 
   Github, ExternalLink, FolderGit2, 
-  ShoppingCart, Database, Users, TrendingUp,
-  Terminal, Server, Globe, Code2, Cpu
+  ShoppingCart, Globe, Code2,
+  Terminal, Server,
+  TestTube, Smartphone, BookOpen,
+  School, Building2, TreePine, Church, Shirt
 } from "lucide-react";
 
-// Client Projects dari CV - BIIS CORP & SAMWI
-const clientProjects = [
+interface ProjectData {
+  name: string;
+  repo: string;
+  desc: string;
+  tags: string[];
+  icon: React.ElementType;
+  demo?: string;
+  image?: string;
+}
+
+// Client Projects - BIIS CORP & SAMWI
+const clientProjects: ProjectData[] = [
   { 
     name: "MD Mall Blora", 
-    company: "BIIS CORP", 
-    type: "ERP Testing",
     icon: ShoppingCart,
     desc: "Comprehensive ERP testing ensuring seamless inventory, sales, and reporting workflows for a regional retail hub.",
-    tags: ["ERP Testing", "Manual"]
+    tags: ["ERP Testing", "Manual"],
+    repo: "#",
   },
   { 
     name: "Envio Store", 
-    company: "BIIS CORP", 
-    type: "E2E Testing",
     icon: Globe,
     desc: "End-to-End (E2E) testing framework implementation for an e-commerce platform, verifying user journeys from login to checkout.",
-    tags: ["E2E", "Cypress"]
+    tags: ["E2E", "Cypress"],
+    repo: "#",
   },
   { 
     name: "Simpan Pinjam PLN", 
-    company: "BIIS CORP", 
-    type: "UAT",
-    icon: Database,
+    icon: Terminal,
     desc: "Led User Acceptance Testing (UAT) phases for a cooperative financial system, validating complex loan calculation logic.",
-    tags: ["UAT", "Finance"]
+    tags: ["UAT", "Finance"],
+    repo: "#",
   },
   { 
     name: "HRIS BSH", 
-    company: "BIIS CORP", 
-    type: "ERP Testing",
-    icon: Users,
+    icon: FolderGit2,
     desc: "Rigorous testing of Human Resource Information System modules including payroll, attendance, and performance evaluation.",
-    tags: ["ERP Testing", "HRIS"]
+    tags: ["ERP Testing", "HRIS"],
+    repo: "#",
   },
   { 
     name: "Sejati Manunggal", 
-    company: "BIIS CORP", 
-    type: "ERP",
-    icon: TrendingUp,
+    icon: Terminal,
     desc: "Enterprise ERP testing for manufacturing workflows and supply chain management.",
-    tags: ["ERP", "Manufacturing"]
+    tags: ["ERP", "Manufacturing"],
+    repo: "#",
   },
   { 
     name: "Online LMS", 
-    company: "SAMWI", 
-    type: "Automation",
     icon: Server,
     desc: "Cypress automation for online learning platform with E2E and regression testing.",
-    tags: ["Automation", "EdTech"]
+    tags: ["Automation", "EdTech"],
+    repo: "#",
   },
+];
+
+const qaProjects: ProjectData[] = [
+  { 
+    name: "SDET Web", 
+    icon: TestTube,
+    desc: "UI testing (Playwright), performance test (K6), security (SQL injection), and CI/CD GitHub Actions with HTML report.",
+    tags: ["Playwright", "K6", "CI/CD", "E2E"],
+    repo: "https://github.com/jefryKurniawan/sauceDemo-Portofolio",
+    demo: "https://www.linkedin.com/posts/jefry-kurniawan-7443272aa_sdet-qaautomation-playwright-activity-7449859752882307073-_7GC",
+  },
+  { 
+    name: "API Automation", 
+    icon: Code2,
+    desc: "Smoke, functional, regression, integration, and negative API tests using Axios + Jest + TypeScript with GitHub Actions pipeline.",
+    tags: ["Axios", "Jest", "TypeScript", "CI/CD"],
+    repo: "https://github.com/jefryKurniawan/apiAutomation-portofolio",
+    demo: "https://www.linkedin.com/posts/jefry-kurniawan-7443272aa_apiautomation-sdet-typescript-activity-7450478565210636289-uTa8",
+  },
+  { 
+    name: "API Testing (Postman)", 
+    icon: Server,
+    desc: "CRUD operations, positive & negative testing, response validation with Postman automated assertions.",
+    tags: ["Postman", "Newman", "API Testing"],
+    repo: "https://github.com/jefryKurniawan/apiTestingPortofolio-JefryK",
+    demo: "https://www.linkedin.com/posts/jefry-kurniawan-7443272aa_github-jefrykurniawanapitestingportofolio-jefryk-activity-7449340523204567040-HdMp",
+  },
+  { 
+    name: "Mobile Testing", 
+    icon: Smartphone,
+    desc: "Appium + WebdriverIO + TypeScript E2E testing on Android Emulator. APK-only black-box approach with 4 passing tests.",
+    tags: ["Appium", "WebdriverIO", "Android", "E2E"],
+    repo: "https://github.com/jefryKurniawan/mobileSDET-Portofolio",
+    demo: "https://www.linkedin.com/posts/jefry-kurniawan-7443272aa_mobiletesting-appium-webdriverio-activity-7450108457875058688-6zpi",
+  },
+  { 
+    name: "Web & Mobile Testing", 
+    icon: BookOpen,
+    desc: "Selenium automation from University of Minnesota Coursera course. Web and mobile test automation covering multiple platforms.",
+    tags: ["Selenium", "Java", "Coursera"],
+    repo: "https://github.com/jefrykurniawan/Web-MobileTestingSelenium",
+    demo: "https://www.linkedin.com/posts/jefry-kurniawan-7443272aa_softwaretesting-testautomation-selenium-activity-7458770597532061696--gdx",
+  },
+];
+
+const fullstackProjects: ProjectData[] = [
+  { 
+    name: "SIM Sekolah MTS Hasanuddin", 
+    icon: School,
+    desc: "School management information system built with Laravel for academic data management, scheduling, and reporting.",
+    tags: ["Laravel", "MySQL", "Management"],
+    repo: "https://github.com/jefryKurniawan/sim-mts-hasanuddin",
+  },
+  { 
+    name: "Axia Orto", 
+    icon: Globe,
+    desc: "React TypeScript + Laravel fullstack application with debloated architecture for modern web performance.",
+    tags: ["React", "TypeScript", "Laravel"],
+    repo: "https://github.com/jefryKurniawan/axia-orto",
+  },
+  { 
+    name: "KSP ERP", 
+    icon: Building2,
+    desc: "Enterprise ERP system built with Laravel + MySQL for cooperative management, financial tracking, and member services.",
+    tags: ["Laravel", "ERP", "MySQL"],
+    repo: "https://github.com/jefryKurniawan/ksp-erp",
+  },
+  { 
+    name: "TandurAI", 
+    icon: TreePine,
+    desc: "AI-powered agricultural app built with React Native (Expo) + FastAPI backend for smart farming assistance.",
+    tags: ["React Native", "Expo", "FastAPI", "AI"],
+    repo: "https://github.com/jefryKurniawan/TandurAI",
+  },
+  { 
+    name: "Masjid Al-Ikhlas", 
+    icon: Church,
+    desc: "Mosque management application for donation tracking, event scheduling, and community engagement built with Laravel.",
+    tags: ["Laravel", "MySQL", "Management"],
+    repo: "https://github.com/jefryKurniawan/al-ikhlas-mosque",
+  },
+  { 
+    name: "Aplikasi Laundry", 
+    icon: Shirt,
+    desc: "Laundry management system with order tracking, payment processing, transaction notes, and owner dashboard. Built with Laravel.",
+    tags: ["Laravel", "MySQL", "Management"],
+    repo: "https://github.com/jefryKurniawan/laundry",
+    image: "/images/projects/laundry/home-2.png",
+  },
+];
+
+const projectSections = [
+  { title: "Client Projects", cmd: "ls client_projects/", items: clientProjects },
+  { title: "QA Automation", cmd: "ls sdet_portfolio/", items: qaProjects },
+  { title: "Fullstack", cmd: "ls fullstack_projects/", items: fullstackProjects },
 ];
 
 export default function ProjectsSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Mouse tracking for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
@@ -75,7 +175,6 @@ export default function ProjectsSection() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax transforms
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
   const headerScale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
@@ -102,12 +201,8 @@ export default function ProjectsSection() {
       className="py-24 px-4 md:px-8 lg:px-20 relative overflow-hidden min-h-screen"
       suppressHydrationWarning
     >
-      {/* ===== CRAZY PARALLAX BACKGROUND ===== */}
-      
-      {/* Layer 1: Base gradient */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 bg-gradient-to-b from-fedora-darker via-fedora-dark to-background" />
       
-      {/* Layer 2: Terminal grid */}
       <motion.div 
         style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
         className="absolute inset-0 opacity-20"
@@ -115,7 +210,6 @@ export default function ProjectsSection() {
         <div className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(48,111,195,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
       </motion.div>
       
-      {/* Layer 3: Floating particles */}
       {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
@@ -135,7 +229,6 @@ export default function ProjectsSection() {
         />
       ))}
       
-      {/* Layer 4: Glowing orbs */}
       <motion.div 
         style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
         animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.2, 0.08] }}
@@ -150,7 +243,6 @@ export default function ProjectsSection() {
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Terminal Header */}
         <motion.div 
           style={{ opacity: headerOpacity, scale: headerScale }}
           initial={{ opacity: 0, y: 30 }}
@@ -168,51 +260,37 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* Projects Section - Terminal Style */}
-        <div className="mb-20">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-3 mb-8 font-mono"
-          >
-            <FolderGit2 className="w-5 h-5 text-fedora-primary" />
-            <span className="text-fedora-primary">&gt;</span>
-            <span className="text-white font-bold">cat projects.log</span>
-          </motion.div>
+        {projectSections.map((section, sIdx) => (
+          <div key={section.title} className="mb-16 md:mb-20 last:mb-0">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-3 mb-8 font-mono"
+            >
+              <FolderGit2 className="w-5 h-5 text-fedora-primary" />
+              <span className="text-fedora-primary">&gt;</span>
+              <span className="text-white font-bold">{section.cmd}</span>
+              <span className="text-secondary text-xs hidden sm:inline">({section.items.length} items)</span>
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {clientProjects.map((project, index) => (
-              <ProjectCard 
-                key={index}
-                title={project.name}
-                desc={project.desc}
-                tags={project.tags}
-                index={index}
-                icon={project.icon}
-              />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {section.items.map((project, index) => (
+                <ProjectCard 
+                  key={project.name}
+                  project={project}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </section>
   );
 }
 
-// ProjectCard Component
-function ProjectCard({ 
-  title, 
-  desc, 
-  tags, 
-  index,
-  icon: Icon 
-}: { 
-  title: string; 
-  desc: string; 
-  tags: string[]; 
-  index: number;
-  icon: any;
-}) {
+function ProjectCard({ project, index }: { project: ProjectData; index: number }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -220,31 +298,56 @@ function ProjectCard({
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="glass p-6 rounded-xl border border-fedora-secondary/30 hover:border-fedora-primary/50 transition-all group"
+      className="glass p-4 md:p-6 rounded-xl border border-fedora-secondary/30 hover:border-fedora-primary/50 transition-all group"
     >
       <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-fedora-primary/10 border border-fedora-primary/20">
-            <Icon className="w-5 h-5 text-fedora-primary" />
+        <div className="flex items-center gap-3 min-w-0 flex-1">
+          <div className="p-2 rounded-lg bg-fedora-primary/10 border border-fedora-primary/20 flex-shrink-0">
+            <project.icon className="w-5 h-5 text-fedora-primary" />
           </div>
-          <h3 className="text-lg font-bold text-white font-mono group-hover:text-fedora-primary transition-colors">
-            {title}
+          <h3 className="text-base md:text-lg font-bold text-white font-mono group-hover:text-fedora-primary transition-colors truncate">
+            {project.name}
           </h3>
         </div>
-        <div className="flex gap-2">
-          <button aria-label={`View ${title} repository on GitHub`} className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
+        <div className="flex gap-2 flex-shrink-0 ml-2">
+          <a 
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.name} repository on GitHub`}
+            className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all"
+          >
             <Github className="w-4 h-4" />
-          </button>
-          <button aria-label={`Open ${title} website`} className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
-            <ExternalLink className="w-4 h-4" />
-          </button>
+          </a>
+          {project.demo && (
+            <a 
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.name} demo`}
+              className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all"
+            >
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          )}
         </div>
       </div>
       
-      <p className="text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">{desc}</p>
+      {project.image && (
+        <div className="mb-4 -mx-1">
+          <img 
+            src={project.image}
+            alt={`${project.name} screenshot`}
+            className="w-full h-36 md:h-48 object-cover rounded-lg border border-fedora-secondary/20"
+            loading="lazy"
+          />
+        </div>
+      )}
+      
+      <p className="text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">{project.desc}</p>
       
       <div className="flex flex-wrap gap-2">
-        {tags.map((tag, i) => (
+        {project.tags.map((tag) => (
           <span
             key={tag}
             className="text-[10px] font-mono bg-fedora-secondary/20 text-fedora-primary px-2.5 py-1 rounded border border-fedora-primary/20"

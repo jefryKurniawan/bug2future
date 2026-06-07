@@ -16,27 +16,26 @@ export default function Navbar() {
   }, []);
 
   const scrollToSection = (href: string) => {
-    // Close mobile menu first
     setMobileMenuOpen(false);
     
-    // Handle Home - scroll to top
-    if (href === "#home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    
-    // Handle other sections with offset for fixed navbar
-    const element = document.getElementById(href.replace("#", ""));
-    if (element) {
-      const navbarHeight = 70; // Height of your fixed navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+    setTimeout(() => {
+      if (href === "#home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-    }
+      const element = document.getElementById(href.replace("#", ""));
+      if (element) {
+        const navbarHeight = 70;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }, 200);
   };
 
   const navLinks = [
@@ -44,6 +43,7 @@ export default function Navbar() {
     { name: "Experience", href: "#experience" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
+    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -144,8 +144,8 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="block w-full text-left font-mono text-fedora-text hover:text-fedora-primary py-3 px-4 rounded-lg hover:bg-fedora-primary/10 transition-colors"
+                  whileTap={{ scale: 0.95 }}
+                  className="block w-full text-left font-mono text-fedora-text hover:text-fedora-primary active:bg-fedora-primary/20 py-3 px-4 rounded-lg hover:bg-fedora-primary/10 transition-colors"
                 >
                   <span className="flex items-center gap-3">
                     <span className="text-fedora-primary">{'>'}</span>
