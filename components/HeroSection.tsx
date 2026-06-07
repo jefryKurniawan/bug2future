@@ -3,7 +3,7 @@
 
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
 import { useRef, useEffect, useMemo, useCallback } from "react";
-import { Download, Terminal, CheckCircle, Bug, Box, Server, Zap, FileCheck, Layers, ShieldCheck, RefreshCcw, TestTube, Cloud, Quote } from "lucide-react";
+import { Download, CheckCircle, Bug, Box, Server, Zap, FileCheck, Layers, ShieldCheck, RefreshCcw, TestTube, Cloud, Quote } from "lucide-react";
 import Image from "next/image";
 
 export default function HeroSection() {
@@ -76,10 +76,6 @@ export default function HeroSection() {
   // Memoized handlers
   const handlePhotoHover = useCallback(() => photoScale.set(1.02), []);
   const handlePhotoLeave = useCallback(() => photoScale.set(1), []);
-  
-  const handleContactClick = useCallback(() => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  }, []);
 
   return (
     <section
@@ -124,15 +120,13 @@ export default function HeroSection() {
         <motion.div style={{ y: contentY, opacity: contentOpacity }} className="flex flex-col items-start gap-4 md:gap-6">
           
           <div className="space-y-3 md:space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-gradient leading-[1.15] pb-1 md:pb-2">
               {fullName}
             </h1>
 
             <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }} 
-              className="text-base md:text-xl lg:text-2xl text-secondary flex flex-wrap items-center gap-2 md:gap-3 font-mono">
+              className="text-lg md:text-2xl lg:text-3xl font-mono">
               <span className="text-primary font-semibold">QA Engineer</span>
-              <span className="text-primary/40">•</span>
-              <span>Automation Tester</span>
             </motion.h2>
           </div>
 
@@ -146,13 +140,11 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="flex flex-wrap gap-3 md:gap-4">
-            <motion.button onClick={handleContactClick} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
-              className="bg-brand-primary text-brand-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-accent transition-colors flex items-center gap-2">
-              <Terminal className="w-4 h-4" /> ./contact.sh
-            </motion.button>
             <motion.a href="/resume-jefryK.pdf" download whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
-              className="glass text-brand-primary px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-primary/10 transition-colors flex items-center gap-2 border border-brand-primary/25">
-              <Download className="w-4 h-4" /> Resume
+              className="group relative glass px-5 md:px-6 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold text-brand-primary hover:text-brand-accent transition-colors border border-brand-primary/25 flex items-center gap-2.5">
+              <Download className="w-4 h-4" />
+              <span className="relative">cv.pdf</span>
+              <span className="absolute -top-2 -right-2 w-2 h-2 bg-brand-primary rounded-full animate-ping" />
             </motion.a>
           </motion.div>
         </motion.div>
@@ -207,7 +199,7 @@ export default function HeroSection() {
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="relative lg:hidden flex justify-center mt-4">
           <div className="relative w-60 h-60 rounded-full overflow-hidden glass p-1">
             <Image src="/photo_.webp" alt="Jefry Kurniawan" fill 
-              className="object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" 
+              className="object-cover rounded-full" 
               priority sizes="240px" style={{ objectPosition: 'center 15%', objectFit: 'cover' }} />
           </div>
         </motion.div>

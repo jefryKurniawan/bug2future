@@ -4,6 +4,7 @@ export interface BugReport {
   severity: "critical" | "major" | "minor" | "trivial";
   status: "open" | "in-progress" | "resolved" | "closed";
   environment: string;
+  module: string;
   description: string;
   steps: string[];
   date: string;
@@ -16,6 +17,7 @@ export const bugs: BugReport[] = [
     severity: "critical",
     status: "resolved",
     environment: "Chrome 120, Windows 11",
+    module: "auth",
     description: "When user inputs special characters (!@#$%) in password field during login, the form validation throws an unhandled exception instead of showing a descriptive error message.",
     steps: [
       "Navigate to /login",
@@ -32,6 +34,7 @@ export const bugs: BugReport[] = [
     severity: "major",
     status: "open",
     environment: "Safari 17, macOS 14",
+    module: "checkout",
     description: "Applying two or more promo codes sequentially results in incorrect total calculation. The discount percentage compounds incorrectly, leading to negative total in some cases.",
     steps: [
       "Add 3 items to cart",
@@ -48,6 +51,7 @@ export const bugs: BugReport[] = [
     severity: "major",
     status: "in-progress",
     environment: "Firefox 121, Android 14",
+    module: "search",
     description: "On 3G or slower connections, the search endpoint times out after 5 seconds but the UI shows a perpetual loading spinner with no fallback error message.",
     steps: [
       "Set network throttling to 'Slow 3G'",
@@ -63,6 +67,7 @@ export const bugs: BugReport[] = [
     severity: "minor",
     status: "resolved",
     environment: "All browsers",
+    module: "profile",
     description: "Uploading an image larger than 5MB in the profile settings triggers a 413 Payload Too Large error without user-friendly feedback.",
     steps: [
       "Navigate to /settings/profile",
@@ -78,6 +83,7 @@ export const bugs: BugReport[] = [
     severity: "minor",
     status: "open",
     environment: "Chrome Mobile, iOS 17",
+    module: "navigation",
     description: "When the mobile hamburger menu is open, the notification badge (top right) overlaps with the first menu item, making it unclickable.",
     steps: [
       "Open app on mobile viewport (375px)",
@@ -93,6 +99,7 @@ export const bugs: BugReport[] = [
     severity: "trivial",
     status: "closed",
     environment: "Firefox 121, Windows 10",
+    module: "reports",
     description: "When exporting reports to PDF, the table borders are missing in Firefox, making the data appear as unformatted text.",
     steps: [
       "Navigate to /reports",
@@ -108,6 +115,7 @@ export const bugs: BugReport[] = [
     severity: "critical",
     status: "resolved",
     environment: "Edge 120, Windows 11",
+    module: "auth",
     description: "After session timeout (30 min inactivity), API calls return 401 but the app does not redirect to the login page. User remains on a broken dashboard until manual refresh.",
     steps: [
       "Login to application",
@@ -123,6 +131,7 @@ export const bugs: BugReport[] = [
     severity: "major",
     status: "open",
     environment: "All browsers",
+    module: "settings",
     description: "When user switches to light mode and navigates to a different page, the theme resets to dark mode. The preference is not persisted in localStorage.",
     steps: [
       "Toggle to light mode",
@@ -137,6 +146,7 @@ export const bugs: BugReport[] = [
     severity: "minor",
     status: "in-progress",
     environment: "Production",
+    module: "payment",
     description: "After successful payment, some users receive two identical confirmation emails. The issue is intermittent and affects approximately 2% of transactions.",
     steps: [
       "Complete payment successfully",
@@ -151,6 +161,7 @@ export const bugs: BugReport[] = [
     severity: "trivial",
     status: "closed",
     environment: "Chrome 120, macOS",
+    module: "analytics",
     description: "When selecting dates before 2020 in the date range filter, the year dropdown displays '20' instead of '2020', causing confusion.",
     steps: [
       "Navigate to /analytics",
