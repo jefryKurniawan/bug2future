@@ -43,14 +43,14 @@ export default function ContactSection() {
   const inputVariants = {
     focus: { 
       scale: 1.02, 
-      borderColor: "rgba(168, 200, 255, 0.6)",
-      boxShadow: "0 0 20px rgba(168, 200, 255, 0.3)",
+      borderColor: "rgba(219, 112, 112, 0.6)",
+      boxShadow: "0 0 20px rgba(219, 112, 112, 0.3)",
       transition: { duration: 0.2 }
     },
     blur: { 
       scale: 1, 
-      borderColor: "rgba(48, 111, 195, 0.2)",
-      boxShadow: "0 0 0px rgba(168, 200, 255, 0)",
+      borderColor: "rgba(184, 58, 58, 0.2)",
+      boxShadow: "0 0 0px rgba(219, 112, 112, 0)",
       transition: { duration: 0.2 }
     }
   };
@@ -75,14 +75,14 @@ export default function ContactSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="flex items-center gap-4 mb-16"
         >
-          <div className="p-3 rounded-lg bg-fedora-primary/10 border border-fedora-primary/30">
-            <Terminal className="w-6 h-6 text-fedora-primary" />
+          <div className="p-3 rounded-lg bg-brand-primary/10 border border-brand-primary/30">
+            <Terminal className="w-6 h-6 text-brand-primary" />
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-[var(--text-heading)] font-mono">
-            <span className="text-fedora-primary mr-2">&gt;</span>
+            <span className="text-brand-primary mr-2">&gt;</span>
             ssh admin@contact
           </h2>
-          <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.2, repeat: Infinity }} className="w-3 h-7 bg-fedora-primary rounded-sm" />
+          <motion.div animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.2, repeat: Infinity }} className="w-3 h-7 bg-brand-primary rounded-sm" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -99,14 +99,14 @@ export default function ContactSection() {
               <motion.a
                 href="mailto:kjefry525@gmail.com"
                 whileHover={{ x: 10, scale: 1.02 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-fedora-primary/40 transition-all duration-300 group"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-brand-primary/40 transition-all duration-300 group"
               >
-                <div className="p-3 rounded-lg bg-fedora-primary/10 group-hover:bg-fedora-primary/20 transition-colors">
-                  <Mail className="w-6 h-6 text-fedora-primary" />
+                <div className="p-3 rounded-lg bg-brand-primary/10 group-hover:bg-brand-primary/20 transition-colors">
+                  <Mail className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-[var(--text-label)] font-mono mb-1">Email</p>
-                  <span className="text-[var(--text-heading)] group-hover:text-fedora-primary transition-colors">kjefry525@gmail.com</span>
+                  <span className="text-[var(--text-heading)] group-hover:text-brand-primary transition-colors">kjefry525@gmail.com</span>
                 </div>
               </motion.a>
 
@@ -115,14 +115,14 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 10, scale: 1.02 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-fedora-primary/40 transition-all duration-300 group"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-brand-primary/40 transition-all duration-300 group"
               >
-                <div className="p-3 rounded-lg bg-fedora-primary/10 group-hover:bg-fedora-primary/20 transition-colors">
-                  <Github className="w-6 h-6 text-fedora-primary" />
+                <div className="p-3 rounded-lg bg-brand-primary/10 group-hover:bg-brand-primary/20 transition-colors">
+                  <Github className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-[var(--text-label)] font-mono mb-1">GitHub</p>
-                  <span className="text-[var(--text-heading)] group-hover:text-fedora-primary transition-colors">github.com/jefryKurniawan</span>
+                  <span className="text-[var(--text-heading)] group-hover:text-brand-primary transition-colors">github.com/jefryKurniawan</span>
                 </div>
               </motion.a>
 
@@ -131,14 +131,14 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ x: 10, scale: 1.02 }}
-                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-fedora-primary/40 transition-all duration-300 group"
+                className="flex items-center gap-4 p-4 rounded-xl bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/50 hover:border-brand-primary/40 transition-all duration-300 group"
               >
-                <div className="p-3 rounded-lg bg-fedora-primary/10 group-hover:bg-fedora-primary/20 transition-colors">
-                  <Linkedin className="w-6 h-6 text-fedora-primary" />
+                <div className="p-3 rounded-lg bg-brand-primary/10 group-hover:bg-brand-primary/20 transition-colors">
+                  <Linkedin className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-[var(--text-label)] font-mono mb-1">LinkedIn</p>
-                  <span className="text-[var(--text-heading)] group-hover:text-fedora-primary transition-colors">linkedin.com/in/jefry-kurniawan-7443272aa</span>
+                  <span className="text-[var(--text-heading)] group-hover:text-brand-primary transition-colors">linkedin.com/in/jefry-kurniawan-7443272aa</span>
                 </div>
               </motion.a>
             </div>
@@ -150,11 +150,11 @@ export default function ContactSection() {
                 <span className="font-mono text-sm">Available for opportunities</span>
               </div>
               <div className="flex items-center gap-3 text-[var(--text-label)]">
-                <Wifi className="w-4 h-4 text-fedora-primary" />
+                <Wifi className="w-4 h-4 text-brand-primary" />
                 <span className="font-mono text-sm">Response time: &lt; 24 hours</span>
               </div>
               <div className="flex items-center gap-3 text-[var(--text-label)]">
-                <Shield className="w-4 h-4 text-fedora-primary" />
+                <Shield className="w-4 h-4 text-brand-primary" />
                 <span className="font-mono text-sm">Open to remote & freelance</span>
               </div>
             </motion.div>
@@ -171,30 +171,30 @@ export default function ContactSection() {
             className="relative"
           >
             {/* Form glow effect */}
-            <motion.div animate={{ boxShadow: ["0 0 20px rgba(168, 200, 255, 0.1)", "0 0 40px rgba(168, 200, 255, 0.2)", "0 0 20px rgba(168, 200, 255, 0.1)"] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-1 bg-gradient-to-r from-fedora-primary/20 via-fedora-accent/20 to-fedora-primary/20 rounded-2xl blur-xl -z-10" />
+            <motion.div animate={{ boxShadow: ["0 0 20px rgba(184, 58, 58, 0.1)", "0 0 40px rgba(184, 58, 58, 0.2)", "0 0 20px rgba(184, 58, 58, 0.1)"] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-1 bg-gradient-to-r from-brand-primary/20 via-brand-accent/20 to-brand-primary/20 rounded-2xl blur-xl -z-10" />
 
             <form onSubmit={handleSubmit} className="space-y-6 p-8 rounded-2xl bg-[var(--surface-elevated)]/80 border border-[var(--border-muted)]/60 backdrop-blur-xl">
               {/* Name Field */}
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}>
-                <label className="flex items-center gap-2 text-fedora-primary font-mono text-sm mb-2"><span className="text-fedora-primary">&gt;</span> name</label>
+                <label className="flex items-center gap-2 text-brand-primary font-mono text-sm mb-2"><span className="text-brand-primary">&gt;</span> name</label>
                 <motion.input type="text" placeholder="Enter your alias" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} variants={inputVariants} initial="blur" whileFocus="focus" className="w-full px-4 py-3 rounded-lg bg-[var(--section-start)] border border-[var(--border-muted)]/60 text-[var(--text-heading)] placeholder-[var(--placeholder)] focus:outline-none font-mono transition-all" required />
               </motion.div>
 
               {/* Email Field */}
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }}>
-                <label className="flex items-center gap-2 text-fedora-primary font-mono text-sm mb-2"><span className="text-fedora-primary">&gt;</span> email</label>
+                <label className="flex items-center gap-2 text-brand-primary font-mono text-sm mb-2"><span className="text-brand-primary">&gt;</span> email</label>
                 <motion.input type="email" placeholder="user@domain.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} variants={inputVariants} initial="blur" whileFocus="focus" className="w-full px-4 py-3 rounded-lg bg-[var(--section-start)] border border-[var(--border-muted)]/60 text-[var(--text-heading)] placeholder-[var(--placeholder)] focus:outline-none font-mono transition-all" required />
               </motion.div>
 
               {/* Message Field */}
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.6 }}>
-                <label className="flex items-center gap-2 text-fedora-primary font-mono text-sm mb-2"><span className="text-fedora-primary">&gt;</span> message</label>
+                <label className="flex items-center gap-2 text-brand-primary font-mono text-sm mb-2"><span className="text-brand-primary">&gt;</span> message</label>
                 <motion.textarea placeholder="Initialize communication protocol..." rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} variants={inputVariants} initial="blur" whileFocus="focus" className="w-full px-4 py-3 rounded-lg bg-[var(--section-start)] border border-[var(--border-muted)]/60 text-[var(--text-heading)] placeholder-[var(--placeholder)] focus:outline-none font-mono transition-all resize-none" required />
               </motion.div>
 
               {/* Submit Button */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.7 }}>
-                <motion.button type="submit" disabled={isSubmitting} whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className={`w-full py-4 rounded-lg font-mono font-semibold flex items-center justify-center gap-3 transition-all duration-300 ${submitStatus === "success" ? "bg-[var(--success)] text-[var(--section-start)]" : "bg-gradient-to-r from-fedora-primary to-fedora-accent text-[var(--section-start)] hover:shadow-[0_0_30px_rgba(168,200,255,0.5)]"}`}>
+                <motion.button type="submit" disabled={isSubmitting} whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }} className={`w-full py-4 rounded-lg font-mono font-semibold flex items-center justify-center gap-3 transition-all duration-300 ${submitStatus === "success" ? "bg-[var(--success)] text-[var(--section-start)]" : "bg-gradient-to-r from-brand-primary to-brand-accent text-[var(--section-start)] hover:shadow-[0_0_30px_rgba(184,58,58,0.5)]"}`}>
                   {isSubmitting ? (
                     <><motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-[var(--section-start)] border-t-transparent rounded-full" /><span>TRANSMITTING...</span></>
                   ) : submitStatus === "success" ? (

@@ -53,7 +53,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-fedora-dark/90 backdrop-blur-md border-b border-fedora-secondary/50"
+          ? "bg-brand-dark/90 backdrop-blur-md border-b border-brand-secondary/50"
           : "bg-transparent"
       }`}
     >
@@ -62,7 +62,7 @@ export default function Navbar() {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-2 text-fedora-primary font-mono font-bold text-xl cursor-pointer"
+            className="flex items-center gap-2 text-brand-primary font-mono font-bold text-xl cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <Terminal size={24} />
@@ -78,7 +78,7 @@ export default function Navbar() {
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
                   whileHover={{ y: -2 }}
-                  className="text-fedora-text hover:text-fedora-primary px-3 py-2 rounded-md text-sm font-medium transition-colors font-mono"
+                  className="text-brand-text hover:text-brand-primary px-3 py-2 rounded-md text-sm font-medium transition-colors font-mono"
                 >
                   ./ {link.name}
                 </motion.button>
@@ -89,13 +89,13 @@ export default function Navbar() {
           {/* Right Side: Terminal Icon + Mobile Menu Button */}
           <div className="flex items-center gap-4">
             {/* Terminal Icon - Always Visible */}
-            <Terminal className="hidden md:block w-5 h-5 text-fedora-primary" />
+            <Terminal className="hidden md:block w-5 h-5 text-brand-primary" />
 
             {/* Mobile Menu Button - ONLY visible on mobile */}
             <motion.button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               whileTap={{ scale: 0.9 }}
-              className="md:hidden p-2 rounded-lg text-fedora-primary hover:bg-fedora-primary/10 transition-colors"
+              className="md:hidden p-2 rounded-lg text-brand-primary hover:bg-brand-primary/10 transition-colors"
               aria-label="Toggle menu"
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -134,7 +134,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-fedora-dark/95 backdrop-blur-md border-t border-fedora-secondary/50 overflow-hidden"
+            className="md:hidden bg-brand-dark/95 backdrop-blur-md border-t border-brand-secondary/50 overflow-hidden"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link, index) => (
@@ -145,10 +145,10 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="block w-full text-left font-mono text-fedora-text hover:text-fedora-primary active:bg-fedora-primary/20 py-3 px-4 rounded-lg hover:bg-fedora-primary/10 transition-colors"
+                  className="block w-full text-left font-mono text-brand-text hover:text-brand-primary active:bg-brand-primary/20 py-3 px-4 rounded-lg hover:bg-brand-primary/10 transition-colors"
                 >
                   <span className="flex items-center gap-3">
-                    <span className="text-fedora-primary">{'>'}</span>
+                    <span className="text-brand-primary">{'>'}</span>
                     {link.name}
                   </span>
                 </motion.button>

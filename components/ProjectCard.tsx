@@ -28,11 +28,11 @@ export default function ProjectCard({
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -10 }}
-      className="bg-fedora-dark border border-fedora-secondary/30 rounded-xl overflow-hidden group hover:border-fedora-primary/50 transition-all"
+      className="bg-brand-dark border border-brand-secondary/30 rounded-xl overflow-hidden group hover:border-brand-primary/50 transition-all"
     >
-      <div className="relative h-48 bg-gradient-to-br from-fedora-secondary/20 to-fedora-dark flex items-center justify-center">
-        <div className="absolute inset-0 bg-fedora-primary/10 group-hover:bg-transparent transition-colors z-10" />
-        <Folder size={48} className="text-fedora-primary opacity-50" />
+      <div className="relative h-48 bg-gradient-to-br from-brand-secondary/20 to-brand-dark flex items-center justify-center">
+        <div className="absolute inset-0 bg-brand-primary/10 group-hover:bg-transparent transition-colors z-10" />
+        <Folder size={48} className="text-brand-primary opacity-50" />
       </div>
       
       <div className="p-6">
@@ -45,7 +45,7 @@ export default function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${title} repository on GitHub`}
-                className="text-gray-400 hover:text-fedora-primary transition-colors"
+                className="text-gray-400 hover:text-brand-primary transition-colors"
               >
                 <GitBranch size={20} />
               </a>
@@ -56,7 +56,7 @@ export default function ProjectCard({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Open ${title} website`}
-                className="text-gray-400 hover:text-fedora-primary transition-colors"
+                className="text-gray-400 hover:text-brand-primary transition-colors"
               >
                 <ArrowUpRight size={20} />
               </a>
@@ -70,7 +70,7 @@ export default function ProjectCard({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs font-mono bg-fedora-secondary/20 text-fedora-primary px-3 py-1 rounded-full border border-fedora-primary/20"
+              className="text-xs font-mono bg-brand-secondary/20 text-brand-primary px-3 py-1 rounded-full border border-brand-primary/20"
             >
               {tag}
             </span>

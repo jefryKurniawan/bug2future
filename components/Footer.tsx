@@ -66,7 +66,7 @@ export default function Footer() {
             className="flex-shrink-0"
           >
             <div className="flex items-center gap-2 mb-2">
-              <Terminal className="w-4 h-4 text-fedora-primary" />
+              <Terminal className="w-4 h-4 text-brand-primary" />
               <span className="font-mono font-bold text-[var(--text-heading)] text-sm">bug2future</span>
             </div>
             <p className="text-[var(--text-muted)] text-xs max-w-xs">
@@ -82,12 +82,12 @@ export default function Footer() {
             className="flex-1"
           >
             <div className="flex flex-wrap items-center gap-4 lg:flex-col lg:items-start">
-              <span className="font-mono text-xs text-fedora-primary hidden lg:block mb-1">&gt; NAVIGATION</span>
+              <span className="font-mono text-xs text-brand-primary hidden lg:block mb-1">&gt; NAVIGATION</span>
               {quickLinks.map((item) => (
                 <button
                   key={item}
                   onClick={() => document.getElementById(item.toLowerCase())?.scrollIntoView({ behavior: "smooth" })}
-                  className="text-[var(--text-muted)] hover:text-fedora-primary transition-colors text-xs font-mono flex items-center gap-1 group"
+                  className="text-[var(--text-muted)] hover:text-brand-primary transition-colors text-xs font-mono flex items-center gap-1 group"
                 >
                   <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   {item}
@@ -104,15 +104,15 @@ export default function Footer() {
             className="flex-1"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
-              <a href="mailto:kjefry525@gmail.com" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-fedora-primary transition-colors text-xs group">
+              <a href="mailto:kjefry525@gmail.com" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-brand-primary transition-colors text-xs group">
                 <Mail className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">kjefry525@gmail.com</span>
               </a>
-              <a href="https://github.com/jefryKurniawan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-fedora-primary transition-colors text-xs group">
+              <a href="https://github.com/jefryKurniawan" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-brand-primary transition-colors text-xs group">
                 <Github className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">github.com/jefryKurniawan</span>
               </a>
-              <a href="https://www.linkedin.com/in/jefry-kurniawan-7443272aa/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-fedora-primary transition-colors text-xs group sm:col-span-2 lg:col-span-1">
+              <a href="https://www.linkedin.com/in/jefry-kurniawan-7443272aa/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-[var(--text-muted)] hover:text-brand-primary transition-colors text-xs group sm:col-span-2 lg:col-span-1">
                 <Linkedin className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">linkedin.com/in/jefry-kurniawan</span>
               </a>
@@ -135,10 +135,10 @@ export default function Footer() {
                   rel={social.name !== "LOGS" ? "noopener noreferrer" : undefined}
                   whileHover={{ y: -2, scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/40 hover:border-fedora-primary/40 transition-all"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[var(--surface-elevated)]/60 border border-[var(--border-muted)]/40 hover:border-brand-primary/40 transition-all"
                   title={social.description}
                 >
-                  <social.icon className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-fedora-primary" />
+                  <social.icon className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-brand-primary" />
                   <span className="text-[var(--text-muted)] text-[10px] font-mono hidden sm:inline">{social.name}</span>
                 </motion.a>
               ))}
@@ -154,7 +154,7 @@ export default function Footer() {
           className="mt-4 pt-3 border-t border-[var(--border-muted)]/30 flex flex-col sm:flex-row justify-between items-center gap-2"
         >
           <p className="text-[var(--text-dim)] text-[10px] font-mono text-center sm:text-left">
-            © {currentYear} <span className="text-fedora-primary">JEFRY KURNIAWAN</span>
+            © {currentYear} <span className="text-brand-primary">JEFRY KURNIAWAN</span>
           </p>
           
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--surface-elevated)]/40 border border-[var(--border-muted)]/30">
@@ -176,12 +176,12 @@ export default function Footer() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
         >
-          <span className="text-fedora-primary">$</span>
+          <span className="text-brand-primary">$</span>
           <span className="opacity-60">echo "Thank you for visiting"</span>
           <motion.span
             animate={{ opacity: [1, 0.3, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
-            className="w-1.5 h-3 bg-fedora-primary/40"
+            className="w-1.5 h-3 bg-brand-primary/40"
           />
         </motion.div>
       </div>

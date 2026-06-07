@@ -62,11 +62,11 @@ export default function ExperienceSection() {
     <section ref={containerRef} id="experience" className="py-24 px-4 md:px-8 lg:px-20 relative overflow-hidden">
       
       {/* Background Layers */}
-      <motion.div style={{ y: bgPatternY }} className="absolute inset-0 bg-gradient-to-b from-background via-fedora-dark/95 to-fedora-darker" />
+      <motion.div style={{ y: bgPatternY }} className="absolute inset-0 bg-gradient-to-b from-background via-brand-dark/95 to-brand-darker" />
       
       {/* Grid */}
       <motion.div className="absolute inset-0 opacity-35 pointer-events-none">
-        <motion.div style={{ y: bgPatternY }} className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(48,111,195,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.1)_1px,transparent_1px)] bg-[size:45px_45px]" />
+        <motion.div style={{ y: bgPatternY }} className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(184,58,58,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(184,58,58,0.1)_1px,transparent_1px)] bg-[size:45px_45px]" />
       </motion.div>
 
       <div className="max-w-4xl mx-auto relative z-10">
@@ -75,20 +75,20 @@ export default function ExperienceSection() {
           whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} 
           className="mb-20 flex items-center gap-5">
           <motion.div animate={{ rotate: [0, 12, -12, 0] }} transition={{ duration: 5, repeat: Infinity }} 
-            className="p-4 rounded-2xl bg-fedora-primary/15 border border-fedora-primary/30">
-            <Briefcase className="w-9 h-9 text-fedora-primary" />
+            className="p-4 rounded-2xl bg-brand-primary/15 border border-brand-primary/30">
+            <Briefcase className="w-9 h-9 text-brand-primary" />
           </motion.div>
           <div>
             <h2 className="text-3xl md:text-5xl font-bold text-white">Experience</h2>
             <p className="text-secondary text-sm md:text-base mt-2 font-mono">Professional journey & growth</p>
           </div>
-          <div className="flex-1 h-px bg-gradient-to-r from-fedora-primary/60 to-transparent" />
+          <div className="flex-1 h-px bg-gradient-to-r from-brand-primary/60 to-transparent" />
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           <motion.div style={{ scaleY: timelineScaleY, originY: 0 }} 
-            className="absolute left-4 md:left-9 top-0 bottom-0 w-0.5 bg-gradient-to-b from-fedora-primary via-fedora-accent to-transparent" />
+            className="absolute left-4 md:left-9 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-primary via-brand-accent to-transparent" />
 
           <div className="space-y-10 md:space-y-14">
             {experiences.map((exp, index) => (
@@ -102,9 +102,9 @@ export default function ExperienceSection() {
           className="flex justify-center mt-16">
           <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 2.5, repeat: Infinity }} 
             className="flex flex-col items-center gap-3 text-secondary/70">
-            <div className="w-7 h-12 rounded-full border-2 border-fedora-primary/60 flex items-start justify-center p-1.5">
+            <div className="w-7 h-12 rounded-full border-2 border-brand-primary/60 flex items-start justify-center p-1.5">
               <motion.div animate={{ y: [0, 14, 0], opacity: [1, 0, 1] }} transition={{ duration: 2.5, repeat: Infinity }} 
-                className="w-2 h-2 rounded-full bg-fedora-primary" />
+                className="w-2 h-2 rounded-full bg-brand-primary" />
             </div>
             <span className="text-xs font-mono flex items-center gap-1">explore more <ArrowRight className="w-3 h-3" /></span>
           </motion.div>
@@ -138,20 +138,20 @@ function ExperienceCard({ experience, index, scrollYProgress }: {
       {/* Timeline dot */}
       <motion.div whileHover={{ scale: 1.8 }}
         className={`absolute left-[8px] md:left-[28px] top-11 w-4.5 h-4.5 rounded-full border-2.5 z-10 ${
-          experience.current ? "bg-fedora-primary border-fedora-primary" : "bg-background border-fedora-accent"
+          experience.current ? "bg-brand-primary border-brand-primary" : "bg-background border-brand-accent"
         }`} />
       
       {/* Card */}
       <motion.div whileHover={{ y: -8, scale: 1.02 }} 
         className={`p-7 md:p-10 rounded-2.5xl border backdrop-blur-md ${
-          experience.current ? "bg-fedora-primary/12 border-fedora-primary/50" : "bg-fedora-dark/70 border-fedora-primary/25"
+          experience.current ? "bg-brand-primary/12 border-brand-primary/50" : "bg-brand-dark/70 border-brand-primary/25"
         }`}>
         
         {/* Highlight badge */}
         {experience.highlight && (
           <motion.div initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} 
             transition={{ delay: 0.15, duration: 0.4 }} className="mb-5">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fedora-primary/20 border border-fedora-primary/40 text-fedora-primary text-xs font-mono">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/20 border border-brand-primary/40 text-brand-primary text-xs font-mono">
               <Sparkles className="w-3.5 h-3.5" /> {experience.highlight}
             </span>
           </motion.div>
@@ -159,13 +159,13 @@ function ExperienceCard({ experience, index, scrollYProgress }: {
         
         <div className="flex flex-col md:flex-row md:justify-between gap-5 mb-7">
           <div className="space-y-3">
-            <h3 className={`text-xl md:text-2.5xl font-bold ${experience.current ? "text-fedora-primary" : "text-white"}`}>{experience.title}</h3>
-            <p className="text-fedora-accent font-semibold">{experience.company}</p>
+            <h3 className={`text-xl md:text-2.5xl font-bold ${experience.current ? "text-brand-primary" : "text-white"}`}>{experience.title}</h3>
+            <p className="text-brand-accent font-semibold">{experience.company}</p>
             <div className="flex items-center gap-2.5 text-sm text-secondary">
               <MapPin className="w-4.5 h-4.5" /> {experience.location}
             </div>
           </div>
-          <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-fedora-dark/85 border border-fedora-primary/25 font-mono text-xs text-fedora-lightBlue">
+          <div className="flex items-center gap-2.5 px-5 py-3 rounded-full bg-brand-dark/85 border border-brand-primary/25 font-mono text-xs text-brand-lightBlue">
             <Calendar className="w-4.5 h-4.5" /> {experience.period}
           </div>
         </div>
@@ -178,7 +178,7 @@ function ExperienceCard({ experience, index, scrollYProgress }: {
             <motion.span key={skill} initial={{ opacity: 0, scale: 0.75, y: 15 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} 
               viewport={{ once: true }} transition={{ delay: i * 0.05, type: "spring", stiffness: 400 }} 
               whileHover={{ scale: 1.15, y: -4 }} 
-              className="px-4 py-2 rounded-full bg-fedora-primary/8 border border-fedora-primary/25 text-fedora-primary text-xs font-mono">
+              className="px-4 py-2 rounded-full bg-brand-primary/8 border border-brand-primary/25 text-brand-primary text-xs font-mono">
               {skill}
             </motion.span>
           ))}

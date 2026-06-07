@@ -5,22 +5,22 @@
 /* ===== CSS Variables for Theme Switching ===== */
 :root {
   /* Dark Mode Defaults */
-  --bg-primary: #0B0F19;
-  --bg-secondary: #1b263b;
-  --bg-gradient: #0B0F19;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --text-tertiary: #64748b;
-  --card-bg: rgba(27, 38, 59, 0.7);
-  --card-border: rgba(48, 111, 195, 0.25);
-  --card-shadow: rgba(48, 111, 195, 0.2);
-  --scrollbar-track: #0d1b2a;
-  --scrollbar-thumb: #306fc3;
-  --fedora-primary: #a8c8ff;
-  --fedora-accent: #419cde;
-  --fedora-lightBlue: #5a9fd4;
-  --fedora-dark: #1b263b;
-  --fedora-darker: #0d1b2a;
+  --bg-primary: #0A0A0A;
+  --bg-secondary: #141414;
+  --bg-gradient: #0A0A0A;
+  --text-primary: #EDE0D4;
+  --text-secondary: #A0A0A0;
+  --text-tertiary: #808080;
+  --card-bg: rgba(20, 20, 20, 0.8);
+  --card-border: rgba(184, 58, 58, 0.2);
+  --card-shadow: rgba(184, 58, 58, 0.15);
+  --scrollbar-track: #1A1010;
+  --scrollbar-thumb: #B83A3A;
+  --brand-primary: #B83A3A;
+  --brand-accent: #D94A4A;
+  --brand-warm: #E07A5F;
+  --brand-dark: #1A0E0E;
+  --brand-darker: #0A0505;
 
   --surface-elevated: #1d2024;
   --border-muted: #424751;
@@ -37,22 +37,22 @@
 
 /* Light Mode Overrides - COMPLETE */
 html:not(.dark) {
-  --bg-primary: #f0f4f8;
-  --bg-secondary: #ffffff;
-  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-tertiary: #64748b;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-border: rgba(48, 111, 195, 0.15);
-  --card-shadow: rgba(48, 111, 195, 0.08);
-  --scrollbar-track: #d1d9e6;
-  --scrollbar-thumb: #306fc3;
-  --fedora-primary: #306fc3;
-  --fedora-accent: #419cde;
-  --fedora-lightBlue: #5a9fd4;
-  --fedora-dark: #1e293b;
-  --fedora-darker: #0f172a;
+  --bg-primary: #FAFAFA;
+  --bg-secondary: #FFFFFF;
+  --bg-gradient: linear-gradient(135deg, #FAFAFA 0%, #F5F0F0 100%);
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(184, 58, 58, 0.15);
+  --card-shadow: rgba(184, 58, 58, 0.08);
+  --scrollbar-track: #E8E0E0;
+  --scrollbar-thumb: #B83A3A;
+  --brand-primary: #B83A3A;
+  --brand-accent: #D94A4A;
+  --brand-warm: #E07A5F;
+  --brand-dark: #1A1A1A;
+  --brand-darker: #0A0A0A;
 }
 
 @layer base {
@@ -112,11 +112,11 @@ html:not(.dark) {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--fedora-lightBlue);
+    background: var(--brand-warm);
   }
 
   ::selection {
-    background: rgba(48, 111, 195, 0.3);
+    background: rgba(184, 58, 58, 0.3);
     color: var(--text-primary);
   }
 }
@@ -124,22 +124,22 @@ html:not(.dark) {
 @layer components {
   .bg-grid {
     background-image:
-      linear-gradient(rgba(168, 200, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 200, 255, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(219, 112, 112, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(219, 112, 112, 0.03) 1px, transparent 1px);
     background-size: 50px 50px;
   }
 
   .bg-grid-sm {
     background-image:
-      linear-gradient(rgba(168, 200, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(168, 200, 255, 0.02) 1px, transparent 1px);
+      linear-gradient(rgba(219, 112, 112, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(219, 112, 112, 0.02) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, var(--fedora-primary) 0%, var(--fedora-accent) 50%, var(--fedora-lightBlue) 100%);
+    background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-accent) 50%, var(--brand-warm) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -155,7 +155,7 @@ html:not(.dark) {
   }
 
   .modern-card {
-    background: linear-gradient(135deg, rgba(48, 111, 195, 0.12) 0%, rgba(65, 156, 222, 0.06) 100%);
+    background: linear-gradient(135deg, rgba(184, 58, 58, 0.12) 0%, rgba(217, 74, 74, 0.06) 100%);
     backdrop-filter: blur(20px);
     border: 1px solid var(--card-border);
     box-shadow: 0 12px 40px var(--card-shadow);
@@ -163,7 +163,7 @@ html:not(.dark) {
   }
 
   .text-primary {
-    color: var(--fedora-primary);
+    color: var(--brand-primary);
   }
 
   .text-secondary {

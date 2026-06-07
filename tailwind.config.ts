@@ -13,14 +13,14 @@ const config: Config = {
       colors: {
         background: "#0B0F19",
         foreground: "#ffffff",
-        fedora: {
-          primary: "#a8c8ff",
-          secondary: "#304879",
-          accent: "#419cde",
-          lightBlue: "#5a9fd4",
-          blue: "#306fc3",
-          dark: "#1b263b",
-          darker: "#0d1b2a",
+        brand: {
+          primary: "#B83A3A",
+          secondary: "#8B2020",
+          accent: "#D94A4A",
+          warm: "#E07A5F",
+          deep: "#C0392B",
+          dark: "#1A0E0E",
+          darker: "#0A0505",
         },
       },
       fontFamily: {

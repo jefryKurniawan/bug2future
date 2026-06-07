@@ -34,8 +34,8 @@ const skillCategories: SkillCategory[] = [
     id: "qa-core",
     label: "QA_Core",
     icon: Shield,
-    terminalCmd: "sudo dnf install @qa-essentials",
-    gradient: "from-[#a8c8ff]/20 via-[#419cde]/10 to-transparent",
+    terminalCmd: "sudo pacman -S qa-essentials",
+    gradient: "from-[#DB7070]/20 via-[#D94A4A]/10 to-transparent",
     skills: [
       { name: "Playwright", level: "core", description: "E2E Automation" },
       { name: "Cypress", level: "core", description: "Frontend Testing" },
@@ -52,8 +52,8 @@ const skillCategories: SkillCategory[] = [
     id: "dev-stack",
     label: "Dev_Stack",
     icon: Code,
-    terminalCmd: "dnf groupinstall 'Development Tools'",
-    gradient: "from-[#afc6ff]/20 via-[#65b4f9]/10 to-transparent",
+    terminalCmd: "sudo pacman -S --needed base-devel",
+    gradient: "from-[#C86464]/20 via-[#D94A4A]/10 to-transparent",
     skills: [
       { name: "JavaScript", level: "core", description: "ES6+, Async/Await" },
       { name: "TypeScript", level: "familiar", description: "Type Safety, Generics" },
@@ -90,12 +90,12 @@ const skillCategories: SkillCategory[] = [
     label: "Infra",
     icon: Database,
     terminalCmd: "podman run -d --name db postgres:latest",
-    gradient: "from-[#7dd3fc]/20 via-[#38bdf8]/10 to-transparent",
+    gradient: "from-[#E07A5F]/20 via-[#C0392B]/10 to-transparent",
     skills: [
       { name: "MySQL", level: "advanced", description: "Query Optimization, ERD" },
       { name: "PostgreSQL", level: "familiar", description: "Basic CRUD, Migration" },
       { name: "Azure", level: "familiar", description: "Fundamentals, Cloud Concepts" },
-      { name: "Fedora Linux", level: "core", description: "Daily Driver, XFCE, DNF" },
+      { name: "Arch Linux", level: "core", description: "Daily Driver, CachyOS, Pacman" },
       { name: "Debian", level: "familiar", description: "Server Setup, APT" },
 
     ],
@@ -103,15 +103,15 @@ const skillCategories: SkillCategory[] = [
 ];
 
 const levelColorValues: Record<SkillLevel, { hex: string; rgba: string; label: string; pulse: string }> = {
-  core: { hex: "#a8c8ff", rgba: "rgba(168, 200, 255, 0.5)", label: "Expert", pulse: "0 0 20px rgba(168, 200, 255, 0.3)" },
-  advanced: { hex: "#afc6ff", rgba: "rgba(175, 198, 255, 0.5)", label: "Proficient", pulse: "0 0 20px rgba(175, 198, 255, 0.3)" },
-  familiar: { hex: "#ffb95d", rgba: "rgba(255, 185, 93, 0.5)", label: "Learning", pulse: "0 0 20px rgba(255, 185, 93, 0.3)" },
+  core: { hex: "#DB7070", rgba: "rgba(219, 112, 112, 0.5)", label: "Expert", pulse: "0 0 20px rgba(219, 112, 112, 0.3)" },
+  advanced: { hex: "#C86464", rgba: "rgba(200, 100, 100, 0.5)", label: "Proficient", pulse: "0 0 20px rgba(200, 100, 100, 0.3)" },
+  familiar: { hex: "#E8A84C", rgba: "rgba(232, 168, 76, 0.5)", label: "Learning", pulse: "0 0 20px rgba(232, 168, 76, 0.3)" },
 };
 
 const levelConfig: Record<SkillLevel, { bgClass: string; label: string }> = {
-  core: { bgClass: "bg-[#a8c8ff]", label: "Expert" },
-  advanced: { bgClass: "bg-[#afc6ff]", label: "Proficient" },
-  familiar: { bgClass: "bg-[#ffb95d]", label: "Learning" },
+  core: { bgClass: "bg-[#DB7070]", label: "Expert" },
+  advanced: { bgClass: "bg-[#C86464]", label: "Proficient" },
+  familiar: { bgClass: "bg-[#E8A84C]", label: "Learning" },
 };
 
 const containerVariants: Variants = {
@@ -195,7 +195,7 @@ export default function SkillsSection() {
         <div 
           className="w-[400%] h-[400%] -translate-x-3/8 -translate-y-3/8"
           style={{
-            backgroundImage: `linear-gradient(rgba(168, 200, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 200, 255, 0.06) 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(rgba(219, 112, 112, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(219, 112, 112, 0.06) 1px, transparent 1px)`,
             backgroundSize: "32px 32px",
           }}
         />
@@ -332,7 +332,7 @@ export default function SkillsSection() {
                       </motion.div>
                       
                       <div className="flex-1 min-w-0">
-                        <motion.span className="font-mono text-sm text-on-surface block font-medium" whileHover={{ color: "#a8c8ff" }} transition={{ duration: 0.2 }}>{skill.name}</motion.span>
+                        <motion.span className="font-mono text-sm text-on-surface block font-medium" whileHover={{ color: "#DB7070" }} transition={{ duration: 0.2 }}>{skill.name}</motion.span>
                         {skill.description && (
                           <motion.span className="font-code-sm text-xs text-on-surface-variant/70 hidden group-hover:flex absolute -bottom-8 left-1/2 -translate-x-1/2 bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant/80 whitespace-nowrap z-30 shadow-xl shadow-black/30 backdrop-blur-md" initial={{ opacity: 0, y: 10, scale: 0.95 }} whileHover={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.15 }}>{skill.description}</motion.span>
                         )}
@@ -358,7 +358,7 @@ export default function SkillsSection() {
             className="mt-10 pt-7 border-t border-outline-variant/40 flex flex-wrap gap-5 text-xs font-mono"
           >
             {Object.entries(levelConfig).map(([key, { bgClass, label }]) => (
-              <motion.div key={key} className="flex items-center gap-2.5 text-on-surface-variant/80" whileHover={{ scale: 1.05, color: "#a8c8ff" }} transition={{ duration: 0.2 }}>
+              <motion.div key={key} className="flex items-center gap-2.5 text-on-surface-variant/80" whileHover={{ scale: 1.05, color: "#B83A3A" }} transition={{ duration: 0.2 }}>
                 <motion.div className={`w-2.5 h-2.5 rounded-full ${bgClass}`} animate={{ boxShadow: [`0 0 0 0 ${levelColorValues[key as SkillLevel].rgba}`, `0 0 0 6px ${levelColorValues[key as SkillLevel].rgba.replace("0.5", "0")}`] }} transition={{ duration: 2, repeat: Infinity }} />
                 <span>{label}</span>
               </motion.div>

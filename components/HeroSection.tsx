@@ -89,33 +89,33 @@ export default function HeroSection() {
       suppressHydrationWarning
     >
       {/* Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-br from-fedora-darker via-fedora-dark to-background" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-darker via-brand-dark to-background" />
       
       <motion.div style={{ y: bgGridY }} className="absolute inset-0 opacity-25"
         animate={{ opacity: prefersReducedMotion ? 0.25 : [0.2, 0.3, 0.25] }}
         transition={{ duration: 8, repeat: Infinity }}>
-        <div className="w-full h-full bg-[linear-gradient(to_right,rgba(48,111,195,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.08)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="w-full h-full bg-[linear-gradient(to_right,rgba(184,58,58,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(184,58,58,0.08)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </motion.div>
       
       <motion.div style={{ y: prefersReducedMotion ? 0 : springY }} 
         animate={{ scale: prefersReducedMotion ? 1 : [1, 1.2, 1], opacity: prefersReducedMotion ? 0.15 : [0.1, 0.2, 0.15] }} 
         transition={{ duration: 10, repeat: Infinity }} 
-        className="absolute top-10 left-10 w-72 h-72 md:w-80 md:h-80 bg-fedora-primary/15 rounded-full blur-[100px]" />
+        className="absolute top-10 left-10 w-72 h-72 md:w-80 md:h-80 bg-brand-primary/15 rounded-full blur-[100px]" />
       
       <motion.div style={{ y: prefersReducedMotion ? 0 : springY }} 
         animate={{ scale: prefersReducedMotion ? 1 : [1.2, 1, 1.2], opacity: prefersReducedMotion ? 0.1 : [0.08, 0.15, 0.1] }} 
         transition={{ duration: 12, repeat: Infinity, delay: 1 }} 
-        className="absolute bottom-10 right-10 w-80 h-80 md:w-96 md:h-96 bg-fedora-accent/10 rounded-full blur-[120px]" />
+        className="absolute bottom-10 right-10 w-80 h-80 md:w-96 md:h-96 bg-brand-accent/10 rounded-full blur-[120px]" />
       
       <svg className="absolute inset-0 w-full h-full opacity-15 pointer-events-none">
         {[...Array(4)].map((_, i) => (
-          <line key={i} x1={`${i * 28}%`} y1="0%" x2={`${(i + 1) * 20}%`} y2="100%" stroke="rgba(65,156,222,0.3)" strokeWidth="1" />
+          <line key={i} x1={`${i * 28}%`} y1="0%" x2={`${(i + 1) * 20}%`} y2="100%" stroke="rgba(217,74,74,0.3)" strokeWidth="1" />
         ))}
       </svg>
       
       {!prefersReducedMotion && (
         <motion.div style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }} 
-          className="fixed w-40 h-40 md:w-56 md:h-56 bg-fedora-primary/8 rounded-full blur-[50px] pointer-events-none z-0 hidden md:block" />
+          className="fixed w-40 h-40 md:w-56 md:h-56 bg-brand-primary/8 rounded-full blur-[50px] pointer-events-none z-0 hidden md:block" />
       )}
 
       {/* Main Content */}
@@ -139,19 +139,19 @@ export default function HeroSection() {
           <motion.div ref={photoRef} style={{ rotateX: quoteRotateX, rotateY: quoteRotateY, y: contentY }}
             initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.6 }}
             whileHover={{ scale: prefersReducedMotion ? 1 : 1.02 }}
-            className="relative p-4 md:p-5 rounded-xl glass border border-fedora-primary/25 backdrop-blur-sm max-w-xl">
-            <Quote className="w-5 h-5 text-fedora-primary/40 mb-2" />
-            <p className="text-sm md:text-base text-fedora-accent/90 italic leading-relaxed font-medium">{quote}</p>
-            <p className="text-xs md:text-sm text-fedora-primary/70 mt-2 font-mono text-right">{quoteAuthor}</p>
+            className="relative p-4 md:p-5 rounded-xl glass border border-brand-primary/25 backdrop-blur-sm max-w-xl">
+            <Quote className="w-5 h-5 text-brand-primary/40 mb-2" />
+            <p className="text-sm md:text-base text-brand-accent/90 italic leading-relaxed font-medium">{quote}</p>
+            <p className="text-xs md:text-sm text-brand-primary/70 mt-2 font-mono text-right">{quoteAuthor}</p>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="flex flex-wrap gap-3 md:gap-4">
             <motion.button onClick={handleContactClick} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
-              className="bg-fedora-primary text-fedora-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-fedora-lightBlue transition-colors flex items-center gap-2">
+              className="bg-brand-primary text-brand-darker px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-lightBlue transition-colors flex items-center gap-2">
               <Terminal className="w-4 h-4" /> ./contact.sh
             </motion.button>
             <motion.a href="/resume-jefryK.pdf" download whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} 
-              className="glass text-fedora-primary px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-fedora-primary/10 transition-colors flex items-center gap-2 border border-fedora-primary/25">
+              className="glass text-brand-primary px-6 md:px-8 py-3 md:py-3.5 rounded-lg font-mono text-sm font-semibold hover:bg-brand-primary/10 transition-colors flex items-center gap-2 border border-brand-primary/25">
               <Download className="w-4 h-4" /> Resume
             </motion.a>
           </motion.div>
@@ -164,7 +164,7 @@ export default function HeroSection() {
           
           {!prefersReducedMotion && (
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }} 
-              className="absolute inset-0 w-[360px] h-[360px] mx-auto rounded-full border border-fedora-primary/20" />
+              className="absolute inset-0 w-[360px] h-[360px] mx-auto rounded-full border border-brand-primary/20" />
           )}
           
           <motion.div style={{ scale: photoScale }} className="relative w-[300px] h-[300px] mx-auto rounded-full overflow-hidden glass p-1 z-10">
@@ -175,18 +175,18 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div animate={{ y: prefersReducedMotion ? [0, -6, 0] : [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} 
-            className="absolute top-5 right-8 glass px-3 py-2 rounded-lg border border-fedora-primary/25">
-            <div className="flex items-center gap-1.5"><Bug className="w-3.5 h-3.5 text-red-400" /><span className="font-mono text-[10px] text-fedora-lightBlue">0 Bugs</span></div>
+            className="absolute top-5 right-8 glass px-3 py-2 rounded-lg border border-brand-primary/25">
+            <div className="flex items-center gap-1.5"><Bug className="w-3.5 h-3.5 text-red-400" /><span className="font-mono text-[10px] text-brand-lightBlue">0 Bugs</span></div>
           </motion.div>
           
           <motion.div animate={{ y: prefersReducedMotion ? [0, 6, 0] : [0, 10, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 0.8 }} 
-            className="absolute bottom-5 left-8 glass px-3 py-2 rounded-lg border border-fedora-primary/25">
-            <div className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-green-400" /><span className="font-mono text-[10px] text-fedora-lightBlue">All Pass</span></div>
+            className="absolute bottom-5 left-8 glass px-3 py-2 rounded-lg border border-brand-primary/25">
+            <div className="flex items-center gap-1.5"><CheckCircle className="w-3.5 h-3.5 text-green-400" /><span className="font-mono text-[10px] text-brand-lightBlue">All Pass</span></div>
           </motion.div>
           
           <motion.div animate={{ y: prefersReducedMotion ? [0, -5, 0] : [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, delay: 0.4 }} 
-            className="absolute top-1/2 -right-6 glass p-2 rounded-lg border border-fedora-primary/25">
-            <Box className="w-4 h-4 text-fedora-primary" />
+            className="absolute top-1/2 -right-6 glass p-2 rounded-lg border border-brand-primary/25">
+            <Box className="w-4 h-4 text-brand-primary" />
           </motion.div>
           
           {!prefersReducedMotion && techBadges.map((badge) => {
@@ -195,9 +195,9 @@ export default function HeroSection() {
               <motion.div key={badge.text} style={{ position: 'absolute', right: badge.x, top: badge.y, x: springX, y: springY }}
                 animate={{ y: [0, -8, 0], scale: [1, 1.03, 1] }}
                 transition={{ duration: badge.duration, repeat: Infinity, delay: badge.delay, repeatType: "reverse" }}
-                className="glass px-2.5 py-1.5 rounded-lg border border-fedora-primary/20 flex items-center gap-1.5">
-                <IconComponent className="w-2.5 h-2.5 text-fedora-primary" />
-                <span className="text-[10px] font-mono font-semibold text-fedora-primary whitespace-nowrap">{badge.text}</span>
+                className="glass px-2.5 py-1.5 rounded-lg border border-brand-primary/20 flex items-center gap-1.5">
+                <IconComponent className="w-2.5 h-2.5 text-brand-primary" />
+                <span className="text-[10px] font-mono font-semibold text-brand-primary whitespace-nowrap">{badge.text}</span>
               </motion.div>
             );
           })}
@@ -216,8 +216,8 @@ export default function HeroSection() {
       {/* Scroll indicator */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} className="absolute bottom-6 left-1/2 -translate-x-1/2">
         <motion.div animate={{ y: prefersReducedMotion ? [0, 6, 0] : [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }} 
-          className="w-5 h-8 rounded-full border border-fedora-primary/40 flex items-start justify-center p-1">
-          <motion.div animate={{ y: [0, 8, 0], opacity: [1, 0, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-1.5 rounded-full bg-fedora-primary" />
+          className="w-5 h-8 rounded-full border border-brand-primary/40 flex items-start justify-center p-1">
+          <motion.div animate={{ y: [0, 8, 0], opacity: [1, 0, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-1 h-1.5 rounded-full bg-brand-primary" />
         </motion.div>
       </motion.div>
     </section>

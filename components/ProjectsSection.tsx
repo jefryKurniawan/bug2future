@@ -3,6 +3,7 @@
 
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useRef, useState, useEffect, useMemo } from "react";
+import Link from "next/link";
 import { 
   Github, ExternalLink, FolderGit2, 
   ShoppingCart, Globe, Code2,
@@ -18,7 +19,7 @@ interface ProjectData {
   tags: string[];
   icon: React.ElementType;
   demo?: string;
-  image?: string;
+  slug?: string;
 }
 
 // Client Projects - BIIS CORP & SAMWI
@@ -114,6 +115,7 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "SIM Sekolah MTS Hasanuddin", 
     icon: School,
+    slug: "sim-mts-hasanuddin",
     desc: "School management information system built with Laravel for academic data management, scheduling, and reporting.",
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/sim-mts-hasanuddin",
@@ -121,6 +123,7 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "Axia Orto", 
     icon: Globe,
+    slug: "axia-orto",
     desc: "React TypeScript + Laravel fullstack application with debloated architecture for modern web performance.",
     tags: ["React", "TypeScript", "Laravel"],
     repo: "https://github.com/jefryKurniawan/axia-orto",
@@ -128,6 +131,7 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "KSP ERP", 
     icon: Building2,
+    slug: "ksp-erp",
     desc: "Enterprise ERP system built with Laravel + MySQL for cooperative management, financial tracking, and member services.",
     tags: ["Laravel", "ERP", "MySQL"],
     repo: "https://github.com/jefryKurniawan/ksp-erp",
@@ -135,6 +139,7 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "TandurAI", 
     icon: TreePine,
+    slug: "tandurai",
     desc: "AI-powered agricultural app built with React Native (Expo) + FastAPI backend for smart farming assistance.",
     tags: ["React Native", "Expo", "FastAPI", "AI"],
     repo: "https://github.com/jefryKurniawan/TandurAI",
@@ -142,6 +147,7 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "Masjid Al-Ikhlas", 
     icon: Church,
+    slug: "al-ikhlas-mosque",
     desc: "Mosque management application for donation tracking, event scheduling, and community engagement built with Laravel.",
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/al-ikhlas-mosque",
@@ -149,10 +155,10 @@ const fullstackProjects: ProjectData[] = [
   { 
     name: "Aplikasi Laundry", 
     icon: Shirt,
+    slug: "laundry",
     desc: "Laundry management system with order tracking, payment processing, transaction notes, and owner dashboard. Built with Laravel.",
     tags: ["Laravel", "MySQL", "Management"],
     repo: "https://github.com/jefryKurniawan/laundry",
-    image: "/images/projects/laundry/home-2.png",
   },
 ];
 
@@ -201,13 +207,13 @@ export default function ProjectsSection() {
       className="py-24 px-4 md:px-8 lg:px-20 relative overflow-hidden min-h-screen"
       suppressHydrationWarning
     >
-      <motion.div style={{ y: bgY }} className="absolute inset-0 bg-gradient-to-b from-fedora-darker via-fedora-dark to-background" />
+      <motion.div style={{ y: bgY }} className="absolute inset-0 bg-gradient-to-b from-brand-darker via-brand-dark to-background" />
       
       <motion.div 
         style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
         className="absolute inset-0 opacity-20"
       >
-        <div className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(48,111,195,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <div className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(184,58,58,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(184,58,58,0.08)_1px,transparent_1px)] bg-[size:40px_40px]" />
       </motion.div>
       
       {[...Array(15)].map((_, i) => (
@@ -225,7 +231,7 @@ export default function ProjectsSection() {
             scale: [1, 1.3, 1],
           }}
           transition={{ duration: 6 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
-          className="absolute w-1.5 h-1.5 bg-fedora-primary rounded-full"
+          className="absolute w-1.5 h-1.5 bg-brand-primary rounded-full"
         />
       ))}
       
@@ -233,13 +239,13 @@ export default function ProjectsSection() {
         style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
         animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.2, 0.08] }}
         transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-10 left-10 w-72 h-72 md:w-96 md:h-96 bg-fedora-primary/15 rounded-full blur-[120px]"
+        className="absolute top-10 left-10 w-72 h-72 md:w-96 md:h-96 bg-brand-primary/15 rounded-full blur-[120px]"
       />
       <motion.div 
         style={{ x: isTouchDevice ? 0 : springX, y: isTouchDevice ? 0 : springY }}
         animate={{ scale: [1.3, 1, 1.3], opacity: [0.06, 0.15, 0.06] }}
         transition={{ duration: 10, repeat: Infinity, delay: 1.5 }}
-        className="absolute bottom-10 right-10 w-80 h-80 md:w-[28rem] md:h-[28rem] bg-fedora-accent/10 rounded-full blur-[140px]"
+        className="absolute bottom-10 right-10 w-80 h-80 md:w-[28rem] md:h-[28rem] bg-brand-accent/10 rounded-full blur-[140px]"
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -250,9 +256,9 @@ export default function ProjectsSection() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border border-fedora-primary/30 mb-4">
-            <Terminal className="w-5 h-5 text-fedora-primary" />
-            <span className="font-mono text-sm text-fedora-primary">jefry@linux:~/bug2future</span>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full glass border border-brand-primary/30 mb-4">
+            <Terminal className="w-5 h-5 text-brand-primary" />
+            <span className="font-mono text-sm text-brand-primary">jefry@linux:~/bug2future</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-bold text-gradient mb-4 pb-1">Bug to Future</h2>
           <p className="text-secondary text-lg max-w-2xl mx-auto">
@@ -268,8 +274,8 @@ export default function ProjectsSection() {
               viewport={{ once: true }}
               className="flex items-center gap-3 mb-8 font-mono"
             >
-              <FolderGit2 className="w-5 h-5 text-fedora-primary" />
-              <span className="text-fedora-primary">&gt;</span>
+              <FolderGit2 className="w-5 h-5 text-brand-primary" />
+              <span className="text-brand-primary">&gt;</span>
               <span className="text-white font-bold">{section.cmd}</span>
               <span className="text-secondary text-xs hidden sm:inline">({section.items.length} items)</span>
             </motion.div>
@@ -291,21 +297,21 @@ export default function ProjectsSection() {
 }
 
 function ProjectCard({ project, index }: { project: ProjectData; index: number }) {
-  return (
+  const card = (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="glass p-4 md:p-6 rounded-xl border border-fedora-secondary/30 hover:border-fedora-primary/50 transition-all group"
+      className="glass p-4 md:p-6 rounded-xl border border-brand-secondary/30 hover:border-brand-primary/50 transition-all group h-full"
     >
       <div className="flex justify-between items-start mb-4">
         <div className="flex items-center gap-3 min-w-0 flex-1">
-          <div className="p-2 rounded-lg bg-fedora-primary/10 border border-fedora-primary/20 flex-shrink-0">
-            <project.icon className="w-5 h-5 text-fedora-primary" />
+          <div className="p-2 rounded-lg bg-brand-primary/10 border border-brand-primary/20 flex-shrink-0">
+            <project.icon className="w-5 h-5 text-brand-primary" />
           </div>
-          <h3 className="text-base md:text-lg font-bold text-white font-mono group-hover:text-fedora-primary transition-colors truncate">
+          <h3 className="text-base md:text-lg font-bold text-white font-mono group-hover:text-brand-primary transition-colors truncate">
             {project.name}
           </h3>
         </div>
@@ -315,7 +321,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`View ${project.name} repository on GitHub`}
-            className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all"
+            className="p-2 rounded-lg text-secondary hover:text-brand-primary hover:bg-brand-primary/10 transition-all"
           >
             <Github className="w-4 h-4" />
           </a>
@@ -325,7 +331,7 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Open ${project.name} demo`}
-              className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all"
+              className="p-2 rounded-lg text-secondary hover:text-brand-primary hover:bg-brand-primary/10 transition-all"
             >
               <ExternalLink className="w-4 h-4" />
             </a>
@@ -333,24 +339,13 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
         </div>
       </div>
       
-      {project.image && (
-        <div className="mb-4 -mx-1">
-          <img 
-            src={project.image}
-            alt={`${project.name} screenshot`}
-            className="w-full h-36 md:h-48 object-cover rounded-lg border border-fedora-secondary/20"
-            loading="lazy"
-          />
-        </div>
-      )}
-      
       <p className="text-secondary text-sm mb-4 line-clamp-2 leading-relaxed">{project.desc}</p>
       
       <div className="flex flex-wrap gap-2">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="text-[10px] font-mono bg-fedora-secondary/20 text-fedora-primary px-2.5 py-1 rounded border border-fedora-primary/20"
+            className="text-[10px] font-mono bg-brand-secondary/20 text-brand-primary px-2.5 py-1 rounded border border-brand-primary/20"
           >
             {tag}
           </span>
@@ -358,4 +353,14 @@ function ProjectCard({ project, index }: { project: ProjectData; index: number }
       </div>
     </motion.div>
   );
+
+  if (project.slug) {
+    return (
+      <Link href={`/projects/${project.slug}`} className="block">
+        {card}
+      </Link>
+    );
+  }
+
+  return card;
 }
