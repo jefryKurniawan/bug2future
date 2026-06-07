@@ -1,21 +1,22 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import { Terminal, RefreshCcw, Bug, ShieldCheck, TestTube, BarChart3 } from "lucide-react";
 import { useStore } from "@/hooks/useStore";
 
 const metricIcons = {
-  totalTests: TestTube,
+  totalTestCases: TestTube,
   passRate: ShieldCheck,
-  bugsOpen: Bug,
+  bugsFound: Bug,
   bugsClosed: Bug,
   coverage: BarChart3,
 } as const;
 
 const metricLabels: Record<string, string> = {
-  totalTests: "Total Test Cases",
+  totalTestCases: "Total Test Cases",
   passRate: "Pass Rate",
-  bugsOpen: "Bugs Open",
+  bugsFound: "Bugs Found",
   bugsClosed: "Bugs Closed",
   coverage: "Coverage",
 };
@@ -24,6 +25,12 @@ export default function DashboardMetrics() {
   const metrics = useStore((s) => s.metrics);
   const loading = useStore((s) => s.metricsLoading);
   const refresh = useStore((s) => s.refreshMetrics);
+
+  useEffect(() => {
+    refresh();
+    const interval = setInterval(refresh, 6000);
+    return () => clearInterval(interval);
+  }, [refresh]);
 
   const items = Object.entries(metrics).map(([key, raw]) => {
     const val = typeof raw === "number" ? raw : 0;
@@ -47,7 +54,7 @@ export default function DashboardMetrics() {
             <span className="font-mono text-sm text-brand-primary">❯ jefry@linux:~/qa/dashboard</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-gradient mb-4">QA Dashboard</h2>
-          <p className="text-secondary text-lg max-w-xl mx-auto">Real-time mock metrics — click refresh to simulate</p>
+          <p className="text-secondary text-lg max-w-xl mx-auto">Live mock metrics — auto-refresh every 6s</p>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
