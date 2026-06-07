@@ -161,7 +161,7 @@ export default function HeroSection() {
           
           <motion.div style={{ scale: photoScale }} className="relative w-[300px] h-[300px] mx-auto rounded-full overflow-hidden glass p-1 z-10">
             <Image src="/photo_.webp" alt="Jefry Kurniawan - QA Engineer" fill 
-              className="object-cover rounded-full filter grayscale hover:grayscale-0 transition-all duration-500" 
+              className="object-cover rounded-full" 
               priority sizes="300px" style={{ objectPosition: 'center 15%', objectFit: 'cover' }}
               placeholder="blur" blurDataURL="data:image/webp;base64,UklGRhYAAABXRUJQVlA4IEoAAADQAQCdASoBAAEAAUAmJYgCdAEO/hOMAAD++G+O" />
           </motion.div>

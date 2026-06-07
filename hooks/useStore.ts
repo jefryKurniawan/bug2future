@@ -10,7 +10,7 @@ interface StoreState {
 }
 
 export const useStore = create<StoreState>((set) => ({
-  theme: "dark",
+  theme: "light",
   metrics: defaultMetrics,
   metricsLoading: false,
 
