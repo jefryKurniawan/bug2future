@@ -81,7 +81,7 @@ export default function HeroSection() {
     <section
       id="home"
       ref={containerRef}
-      className="min-h-screen flex items-center relative overflow-hidden px-4 md:px-8 lg:px-20 py-20"
+      className="min-h-screen flex items-center relative overflow-hidden px-4 md:px-8 lg:px-20 pt-20 lg:pt-0 pb-10 lg:pb-0"
       suppressHydrationWarning
     >
       {/* Background Layers */}
