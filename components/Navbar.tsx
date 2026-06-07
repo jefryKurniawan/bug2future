@@ -54,7 +54,7 @@ export default function Navbar() {
       animate={{ y: 0 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-surface backdrop-blur-md border-b border-[var(--card-border)]"
+          ? "glass"
           : "bg-transparent"
       }`}
     >
