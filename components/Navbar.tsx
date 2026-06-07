@@ -79,7 +79,7 @@ export default function Navbar() {
                 className="group relative p-2 rounded-lg text-secondary hover:text-brand-primary hover:bg-brand-primary/10 transition-all"
               >
                 <item.icon size={18} />
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-brand-dark text-white text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 rounded-md bg-[var(--text-primary)] text-[var(--bg-primary)] text-[10px] font-mono whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                   {item.name}
                 </span>
               </motion.button>
