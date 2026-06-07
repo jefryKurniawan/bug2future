@@ -1,9 +1,9 @@
 // components/ExperienceSection.tsx
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
-import { useRef, useEffect, useState, useMemo } from "react";
-import { Calendar, Briefcase, MapPin, ChevronDown, Sparkles, ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { Calendar, Briefcase, MapPin, Sparkles, ArrowRight } from "lucide-react";
 
 const experiences = [
   {
@@ -41,55 +41,12 @@ const experiences = [
 export default function ExperienceSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // ✅ ALL HOOKS AT TOP LEVEL
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 120, damping: 35 });
-  const springY = useSpring(mouseY, { stiffness: 120, damping: 35 });
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
 
-  // ✅ ALL useTransform CALLS AT TOP LEVEL
   const bgPatternY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const orb1Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const orb2Y = useTransform(scrollYProgress, [0, 1], [0, -140]);
   const headerOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
   const headerScale = useTransform(scrollYProgress, [0, 0.3], [0.92, 1]);
   const timelineScaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  
-  // ✅ Pre-compute particle data
-  const particles = useMemo(() => {
-    return Array.from({ length: 15 }, (_, i) => ({
-      id: i,
-      left: `${8 + i * 6}%`,
-      top: `${15 + (i % 5) * 16}%`,
-      duration: 5 + i * 0.4,
-      delay: i * 0.2,
-      scale: 1.2 + i * 0.03,
-      floatAmount: (5 + i * 0.4) * -2,
-    }));
-  }, []);
-
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-      const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      const clientY = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((clientX / innerWidth - 0.5) * 4);
-      mouseY.set((clientY / innerHeight - 0.5) * 4);
-    };
-    
-    // Set isTouchDevice on mount
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleMouseMove, { passive: true });
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleMouseMove);
-    };
-  }, [mouseX, mouseY]);
 
   return (
     <section ref={containerRef} id="experience" className="py-24 px-4 md:px-8 lg:px-20 relative overflow-hidden">
@@ -97,48 +54,10 @@ export default function ExperienceSection() {
       {/* Background Layers */}
       <motion.div style={{ y: bgPatternY }} className="absolute inset-0 bg-gradient-to-b from-background via-fedora-dark/95 to-fedora-darker" />
       
-      {/* Grid with mouse parallax */}
-      <motion.div style={{ x: springX, y: springY }} className="absolute inset-0 opacity-35">
-        <div className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(48,111,195,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.1)_1px,transparent_1px)] bg-[size:45px_45px]" />
+      {/* Grid */}
+      <motion.div className="absolute inset-0 opacity-35 pointer-events-none">
+        <motion.div style={{ y: bgPatternY }} className="w-[300%] h-[300%] -translate-x-1/3 -translate-y-1/3 bg-[linear-gradient(to_right,rgba(48,111,195,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(48,111,195,0.1)_1px,transparent_1px)] bg-[size:45px_45px]" />
       </motion.div>
-      
-      {/* Particles */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          style={{
-            x: springX,
-            y: springY,
-            left: p.left,
-            top: p.top,
-          }}
-          animate={{ 
-            y: [0, -15, 0],
-            opacity: [0.2, 0.6, 0.2], 
-            scale: [1, p.scale, 1] 
-          }}
-          transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
-          className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-fedora-primary rounded-full"
-        />
-      ))}
-      
-      {/* Glowing orbs */}
-      <motion.div style={{ x: springX, y: springY }} 
-        animate={{ scale: [1, 1.4, 1], opacity: [0.12, 0.3, 0.12] }} transition={{ duration: 8, repeat: Infinity }}
-        className="absolute top-5 left-5 w-80 h-80 bg-fedora-primary/20 rounded-full blur-[120px]" />
-      
-      <motion.div style={{ x: springX, y: springY }} 
-        animate={{ scale: [1.4, 1, 1.4], opacity: [0.1, 0.25, 0.1] }} transition={{ duration: 11, repeat: Infinity, delay: 2 }}
-        className="absolute bottom-5 right-5 w-96 h-96 bg-fedora-accent/15 rounded-full blur-[140px]" />
-      
-      {/* Connection lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
-        {[...Array(5)].map((_, i) => (
-          <motion.line key={i} initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 0.25 }}
-            transition={{ duration: 3, delay: i * 0.6, repeat: Infinity, repeatType: "reverse" }}
-            x1={`${i * 22}%`} y1="0%" x2={`${(i + 1) * 18}%`} y2="100%" stroke="rgba(65,156,222,0.5)" strokeWidth="1.5" />
-        ))}
-      </svg>
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
@@ -204,29 +123,29 @@ function ExperienceCard({ experience, index, scrollYProgress }: {
       scale: cardScale,
     }} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} 
       viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8, delay: index * 0.25, type: "spring", stiffness: 120 }} 
-      className="relative pl-22 md:pl-36 group">
+      className="relative pl-14 md:pl-36 group">
       
       {/* Timeline dot */}
       <motion.div whileHover={{ scale: 1.8 }}
-        className={`absolute left-4 md:left-[34px] top-11 w-4.5 h-4.5 rounded-full border-2.5 z-10 ${
+        className={`absolute left-[8px] md:left-[28px] top-11 w-4.5 h-4.5 rounded-full border-2.5 z-10 ${
           experience.current ? "bg-fedora-primary border-fedora-primary" : "bg-background border-fedora-accent"
         }`} />
       
-      {/* Highlight badge */}
-      {experience.highlight && (
-        <motion.div initial={{ opacity: 0, x: 25 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} 
-          transition={{ delay: 0.4 }} className="absolute -top-4 left-22 md:left-36">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fedora-primary/20 border border-fedora-primary/40 text-fedora-primary text-xs font-mono">
-            <Sparkles className="w-3.5 h-3.5" /> {experience.highlight}
-          </span>
-        </motion.div>
-      )}
-
       {/* Card */}
       <motion.div whileHover={{ y: -8, scale: 1.02 }} 
         className={`p-7 md:p-10 rounded-2.5xl border backdrop-blur-md ${
           experience.current ? "bg-fedora-primary/12 border-fedora-primary/50" : "bg-fedora-dark/70 border-fedora-primary/25"
         }`}>
+        
+        {/* Highlight badge */}
+        {experience.highlight && (
+          <motion.div initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} 
+            transition={{ delay: 0.15, duration: 0.4 }} className="mb-5">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-fedora-primary/20 border border-fedora-primary/40 text-fedora-primary text-xs font-mono">
+              <Sparkles className="w-3.5 h-3.5" /> {experience.highlight}
+            </span>
+          </motion.div>
+        )}
         
         <div className="flex flex-col md:flex-row md:justify-between gap-5 mb-7">
           <div className="space-y-3">

@@ -5,13 +5,11 @@ import {
   motion,
   useScroll,
   useTransform,
-  useSpring,
-  useMotionValue,
   useInView,
   AnimatePresence,
   type Variants,
 } from "framer-motion";
-import { useRef, useState, useMemo, useEffect } from "react";
+import { useRef, useState, useMemo } from "react";
 import { Wrench, Code, Shield, Terminal, Database, ChevronRight, Sparkles } from "lucide-react";
 
 type SkillLevel = "core" | "advanced" | "familiar";
@@ -57,10 +55,10 @@ const skillCategories: SkillCategory[] = [
     gradient: "from-[#afc6ff]/20 via-[#65b4f9]/10 to-transparent",
     skills: [
       { name: "JavaScript", level: "core", description: "ES6+, Async/Await" },
-      { name: "TypeScript", level: "advanced", description: "Type Safety, Generics" },
-      { name: "Node.js", level: "advanced", description: "Express, REST API" },
+      { name: "TypeScript", level: "familiar", description: "Type Safety, Generics" },
+      { name: "Node.js", level: "familiar", description: "Express, REST API" },
       { name: "Next.js", level: "familiar", description: "App Router, SSR" },
-      { name: "React", level: "advanced", description: "Hooks, Context, TSX" },
+      { name: "React", level: "familiar", description: "Hooks, Context, TSX" },
       { name: "Laravel", level: "familiar", description: "MVC, Blade, Eloquent" },
       { name: "Tailwind CSS", level: "core", description: "Utility-First, Responsive" },
       { name: "Firebase", level: "familiar", description: "Auth, Firestore, Hosting" },
@@ -77,9 +75,9 @@ const skillCategories: SkillCategory[] = [
       { name: "Git", level: "core", description: "Branching, Rebase, Hooks" },
       { name: "Linux CLI", level: "core", description: "Bash, Podman, Systemd" },
       { name: "OWASP ZAP", level: "familiar", description: "Security Scanning" },
-      { name: "Figma", level: "familiar", description: "Basic UI Design" },
+
       { name: "Browser DevTools", level: "core", description: "Debugging, Network, Console" },
-      { name: "Podman", level: "advanced", description: "Container Management" },
+      { name: "Podman", level: "familiar", description: "Container Management" },
       { name: "JIRA", level: "core", description: "Agile, Sprint Tracking" },
     ],
   },
@@ -95,7 +93,7 @@ const skillCategories: SkillCategory[] = [
       { name: "Azure", level: "familiar", description: "Fundamentals, Cloud Concepts" },
       { name: "Fedora Linux", level: "core", description: "Daily Driver, XFCE, DNF" },
       { name: "Debian", level: "familiar", description: "Server Setup, APT" },
-      { name: "Self-Hosted CI/CD", level: "advanced", description: "Home Lab Experiment" },
+
     ],
   },
 ];
@@ -129,7 +127,6 @@ const itemVariants: Variants = {
 
 export default function SkillsSection() {
   const [activeTab, setActiveTab] = useState<string>("qa-core");
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -138,17 +135,12 @@ export default function SkillsSection() {
   
   const bgGridY = useTransform(scrollYProgress, (v: number) => v * 80);
   const bgGradientY = useTransform(scrollYProgress, (v: number) => v * -120);
-  const orb1Y = useTransform(scrollYProgress, (v: number) => v * -60);
-  const orb2Y = useTransform(scrollYProgress, (v: number) => v * -100);
-  const orb3Y = useTransform(scrollYProgress, (v: number) => v * -140);
   const headerScale = useTransform(scrollYProgress, (v: number) => 0.95 + v * 0.05);
   const headerRotate = useTransform(scrollYProgress, (v: number) => v * 2);
   const gridOpacity = useTransform(scrollYProgress, (v: number) => v < 0.5 ? v * 0.8 : 0.4 - (v - 0.5) * 0.8);
   const skillCardY = useTransform(scrollYProgress, (v: number) => 20 - v * 20);
   const skillCardScale = useTransform(scrollYProgress, (v: number) => 0.98 + v * 0.02);
   const hintParallaxY = useTransform(scrollYProgress, (v: number) => v > 0.8 ? (v - 0.8) * 100 : 0);
-  const particleScrollY = useTransform(scrollYProgress, (v: number) => v * -15);
-  const particleScrollX = useTransform(scrollYProgress, (v: number) => v * 20);
 
   const headerOpacity = useTransform(scrollYProgress, (v: number): number => {
     if (v < 0.2) return v / 0.2;
@@ -162,13 +154,6 @@ export default function SkillsSection() {
     return 0.35;
   });
 
-  // Mouse parallax
-  const mouseX = useMotionValue<number>(0);
-  const mouseY = useMotionValue<number>(0);
-  const springX = useSpring(mouseX, { stiffness: 150, damping: 40, mass: 0.5 });
-  const springY = useSpring(mouseY, { stiffness: 150, damping: 40, mass: 0.5 });
-  const skillArrowX = useTransform(mouseX, (v: number) => v * 0.1);
-
   const activeGradient = useMemo(() => {
     const cat = skillCategories.find(c => c.id === activeTab);
     return cat?.gradient || skillCategories[0].gradient;
@@ -178,38 +163,6 @@ export default function SkillsSection() {
     () => skillCategories.find((cat) => cat.id === activeTab) || skillCategories[0],
     [activeTab]
   );
-
-  const particles = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      left: `${5 + i * 4.5}%`,
-      top: `${10 + (i % 6) * 14}%`,
-      duration: 6 + i * 0.5,
-      delay: i * 0.3,
-      size: 1 + (i % 3) * 0.5,
-      floatRange: 8 + i * 0.6,
-    }));
-  }, []);
-
-  useEffect(() => {
-    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-    
-    const handleMouseMove = (e: MouseEvent | TouchEvent) => {
-      if (isTouchDevice) return;
-      const clientX = 'touches' in e ? e.touches[0].clientX : (e as MouseEvent).clientX;
-      const clientY = 'touches' in e ? e.touches[0].clientY : (e as MouseEvent).clientY;
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((clientX / innerWidth - 0.5) * 8);
-      mouseY.set((clientY / innerHeight - 0.5) * 8);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleMouseMove, { passive: true });
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleMouseMove);
-    };
-  }, [mouseX, mouseY, isTouchDevice]);
 
   const handleTabClick = (tabId: string) => {
     setActiveTab(tabId);
@@ -233,71 +186,16 @@ export default function SkillsSection() {
         className="absolute inset-0 bg-gradient-to-b from-background via-[#1a1d24] to-background"
       />
 
-      {/* Nested divs to combine scroll + mouse parallax safely without multi-input useTransform */}
-      <motion.div style={{ y: bgGridY, opacity: gridOpacity }} className="absolute inset-0">
-        <motion.div style={{ x: springX }} className="w-full h-full">
-          <div 
-            className="w-[400%] h-[400%] -translate-x-3/8 -translate-y-3/8"
-            style={{
-              backgroundImage: `linear-gradient(rgba(168, 200, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 200, 255, 0.06) 1px, transparent 1px)`,
-              backgroundSize: "32px 32px",
-            }}
-          />
-        </motion.div>
+      {/* Grid */}
+      <motion.div style={{ y: bgGridY, opacity: gridOpacity }} className="absolute inset-0 pointer-events-none">
+        <div 
+          className="w-[400%] h-[400%] -translate-x-3/8 -translate-y-3/8"
+          style={{
+            backgroundImage: `linear-gradient(rgba(168, 200, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(168, 200, 255, 0.06) 1px, transparent 1px)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
       </motion.div>
-
-      {/* Particles - scroll parallax via style, floating via animate, mouse parallax via nested wrapper */}
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          style={{ x: particleScrollX, y: particleScrollY, left: p.left, top: p.top }}
-          className="absolute"
-        >
-          <motion.div style={{ x: springX }} className="relative">
-            <motion.div
-              animate={{ 
-                y: [0, -p.floatRange, 0],
-                opacity: [0.15, 0.5, 0.15],
-                scale: [1, 1.5 + p.size * 0.3, 1],
-              }}
-              transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay, repeatType: "reverse" as const }}
-              className="w-1 h-1 md:w-1.5 md:h-1.5 bg-primary/60 rounded-full blur-[0.5px]"
-            />
-          </motion.div>
-        </motion.div>
-      ))}
-
-      {/* Orbs - scroll Y on outer, mouse X on inner */}
-      <motion.div style={{ y: orb1Y }} className="absolute top-10 left-10 w-72 h-72 md:w-96 md:h-96 bg-[#a8c8ff]/20 rounded-full blur-[100px] pointer-events-none">
-        <motion.div style={{ x: springX }} animate={{ scale: [1, 1.6, 1], opacity: [0.08, 0.25, 0.08] }} transition={{ duration: 10, repeat: Infinity }} className="w-full h-full" />
-      </motion.div>
-      <motion.div style={{ y: orb2Y }} className="absolute bottom-20 right-10 w-80 h-80 md:w-[28rem] md:h-[28rem] bg-[#ffb95d]/15 rounded-full blur-[120px] pointer-events-none">
-        <motion.div style={{ x: springX }} animate={{ scale: [1.4, 1, 1.4], opacity: [0.06, 0.2, 0.06] }} transition={{ duration: 13, repeat: Infinity, delay: 3 }} className="w-full h-full" />
-      </motion.div>
-      <motion.div style={{ y: orb3Y }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 bg-[#afc6ff]/10 rounded-full blur-[140px] pointer-events-none">
-        <motion.div style={{ x: springX }} animate={{ scale: [1.2, 1.8, 1.2], opacity: [0.05, 0.18, 0.05] }} transition={{ duration: 15, repeat: Infinity, delay: 6 }} className="w-full h-full" />
-      </motion.div>
-
-      {/* SVG Connection Lines */}
-      <svg className="absolute inset-0 w-full h-full opacity-15 pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.line 
-            key={i} 
-            initial={{ pathLength: 0, opacity: 0 }} 
-            animate={{ pathLength: 1, opacity: 0.3 }}
-            transition={{ duration: 4, delay: i * 0.7, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-            x1={`${i * 18}%`} y1="0%" x2={`${(i + 1) * 15}%`} y2="100%" 
-            stroke="url(#gradient-line)" strokeWidth="1" 
-          />
-        ))}
-        <defs>
-          <linearGradient id="gradient-line" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#a8c8ff" stopOpacity="0" />
-            <stop offset="50%" stopColor="#a8c8ff" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#a8c8ff" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
 
       {/* Active category gradient overlay */}
       <motion.div
@@ -354,7 +252,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.25, duration: 0.6 }}
-          className="flex flex-wrap gap-2.5 mb-10 pb-3 border-b border-outline-variant/60"
+          className="flex flex-wrap gap-1.5 mb-8 border-b border-outline-variant/60"
         >
           {skillCategories.map((category) => {
             const Icon = category.icon;
@@ -366,19 +264,13 @@ export default function SkillsSection() {
                 onClick={() => handleTabClick(category.id)}
                 whileHover={{ scale: 1.06, y: -2 }}
                 whileTap={{ scale: 0.96 }}
-                className={`relative px-5 py-3 rounded-t-xl font-mono text-sm tracking-tight transition-all duration-300 flex items-center gap-2.5 group ${isActive ? "text-primary border-b-2 border-primary bg-primary/10 shadow-lg shadow-primary/20" : "text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50"}`}
+                className={`relative px-4 md:px-5 py-3 font-mono text-sm tracking-tight transition-all duration-300 flex items-center gap-2 group whitespace-nowrap ${isActive ? "text-primary bg-surface border border-outline-variant/60 border-b-0 rounded-t-lg shadow-sm z-10 mb-[-1px]" : "text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 rounded-t-lg"}`}
               >
                 <motion.div animate={isActive ? { rotate: [0, -10, 10, 0], scale: [1, 1.2, 1] } : {}} transition={{ duration: 0.4 }}>
                   <Icon className={`w-4.5 h-4.5 ${isActive ? "text-primary" : "text-on-surface-variant group-hover:text-on-surface transition-colors"}`} />
                 </motion.div>
-                <span className="relative">
-                  {category.label}
-                  {isActive && <motion.span layoutId="tabIndicator" className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary rounded-full" transition={{ type: "spring", bounce: 0.4, duration: 0.5 }} />}
-                </span>
-                {isActive && <motion.div layoutId="activeTabGlow" className="absolute inset-0 rounded-t-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent -z-10" transition={{ type: "spring", bounce: 0.3, duration: 0.5 }} />}
-                <motion.div initial={{ opacity: 0, scale: 0 }} whileHover={{ opacity: 1, scale: 1 }} className="absolute -top-1 -right-1">
-                  <Sparkles className="w-3 h-3 text-[#ffb95d] opacity-0 group-hover:opacity-100 transition-opacity" />
-                </motion.div>
+                <span>{category.label}</span>
+                {isActive && <motion.div layoutId="activeTabGlow" className="absolute inset-0 rounded-t-lg bg-gradient-to-r from-primary/10 via-primary/5 to-transparent -z-10" transition={{ type: "spring", bounce: 0.3, duration: 0.5 }} />}
               </motion.button>
             );
           })}
@@ -390,7 +282,7 @@ export default function SkillsSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="glass-panel p-6 md:p-9 rounded-2xl relative"
+          className="bg-surface/80 backdrop-blur-sm border border-outline-variant/60 rounded-2xl p-6 md:p-9 relative"
         >
           <motion.div
             key={`glow-${activeTab}`}
@@ -424,7 +316,7 @@ export default function SkillsSection() {
                     <motion.div
                       style={{ boxShadow: `0 0 0 0 ${colorVal.rgba}` }}
                       whileHover={{ boxShadow: colorVal.pulse, transition: { duration: 0.2 } }}
-                      className={`bg-surface/90 border border-outline-variant/60 rounded-xl p-4 md:p-5 cursor-default flex items-center gap-3.5 transition-all duration-400 hover:border-primary/70 hover:bg-surface-container/80 backdrop-blur-sm`}
+                      className={`bg-surface/90 border border-outline-variant/60 rounded-xl p-2.5 md:p-5 cursor-default flex items-center gap-2 md:gap-3.5 transition-all duration-400 hover:border-primary/70 hover:bg-surface-container/80 backdrop-blur-sm`}
                     >
                       <motion.div
                         className={`w-3 h-3 rounded-full ${config.bgClass} relative flex-shrink-0`}
@@ -442,9 +334,9 @@ export default function SkillsSection() {
                         )}
                       </div>
 
-                      <motion.div style={{ x: skillArrowX }}>
+                      <div>
                         <ChevronRight className="w-4.5 h-4.5 text-on-surface-variant opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200" />
-                      </motion.div>
+                      </div>
                     </motion.div>
 
                     <motion.div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />

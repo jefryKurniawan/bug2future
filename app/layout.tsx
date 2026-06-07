@@ -17,6 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <link rel="preload" as="image" href="/photo_.webp" fetchPriority="high" />
+      </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
         {children}
       </body>

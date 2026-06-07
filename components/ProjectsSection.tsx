@@ -162,7 +162,7 @@ export default function ProjectsSection() {
             <Terminal className="w-5 h-5 text-fedora-primary" />
             <span className="font-mono text-sm text-fedora-primary">jefry@linux:~/bug2future</span>
           </div>
-          <h2 className="text-4xl md:text-6xl font-bold text-gradient mb-4">Bug to Future</h2>
+          <h2 className="text-4xl md:text-6xl font-bold text-gradient mb-4 pb-1">Bug to Future</h2>
           <p className="text-secondary text-lg max-w-2xl mx-auto">
             Ensuring stability in a chaotic digital universe through rigorous QA engineering and automated testing.
           </p>
@@ -232,10 +232,10 @@ function ProjectCard({
           </h3>
         </div>
         <div className="flex gap-2">
-          <button className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
+          <button aria-label={`View ${title} repository on GitHub`} className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
             <Github className="w-4 h-4" />
           </button>
-          <button className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
+          <button aria-label={`Open ${title} website`} className="p-2 rounded-lg text-secondary hover:text-fedora-primary hover:bg-fedora-primary/10 transition-all">
             <ExternalLink className="w-4 h-4" />
           </button>
         </div>

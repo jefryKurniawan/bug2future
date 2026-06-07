@@ -9,6 +9,7 @@ import HeroSection from "@/components/HeroSection";
 import ExperienceSection from "@/components/ExperienceSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import SkillsSection from "@/components/SkillsSection";
+import CertificationSection from "@/components/CertificationSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -21,17 +22,16 @@ export default function Home() {
         {loading && <BootLoader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      {!loading && (
-        <main className="min-h-screen bg-background">
-          <Navbar /> {/* ✅ Ubah dari <Navigation /> ke <Navbar /> */}
-          <HeroSection />
-          <ExperienceSection />
-          <ProjectsSection />
-          <SkillsSection />
-          <ContactSection />
-          <Footer />
-        </main>
-      )}
+      <main className="min-h-screen bg-background">
+        <Navbar /> {/* ✅ Ubah dari <Navigation /> ke <Navbar /> */}
+        <HeroSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <CertificationSection />
+        <ContactSection />
+        <Footer />
+      </main>
     </>
   );
 }

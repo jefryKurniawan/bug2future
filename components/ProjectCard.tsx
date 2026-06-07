@@ -44,6 +44,7 @@ export default function ProjectCard({
                 href={repo}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`View ${title} repository on GitHub`}
                 className="text-gray-400 hover:text-fedora-primary transition-colors"
               >
                 <GitBranch size={20} />
@@ -54,6 +55,7 @@ export default function ProjectCard({
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Open ${title} website`}
                 className="text-gray-400 hover:text-fedora-primary transition-colors"
               >
                 <ArrowUpRight size={20} />
