@@ -38,7 +38,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
     <main className="min-h-screen bg-background">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-8 md:py-12">
         <Link
-          href="/#projects"
+          href={`/#${project.sectionCmd || "projects"}`}
           className="inline-flex items-center gap-2 text-secondary hover:text-brand-primary transition-colors mb-8 text-sm"
         >
           <ArrowLeft className="w-4 h-4" /> Back to Projects

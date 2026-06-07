@@ -221,8 +221,10 @@ export default function ProjectsSection() {
           </p>
         </motion.div>
 
-        {projectSections.map((section) => (
-          <div key={section.title} className="mb-16 md:mb-20 last:mb-0">
+        {projectSections.map((section) => {
+          const sectionId = section.cmd.replace("ls ", "").replace("/", "");
+          return (
+          <div key={section.title} id={sectionId} className="mb-16 md:mb-20 last:mb-0">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -245,7 +247,8 @@ export default function ProjectsSection() {
               ))}
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

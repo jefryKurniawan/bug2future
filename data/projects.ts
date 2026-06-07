@@ -8,6 +8,7 @@ export interface FullstackProject {
   iconName: string;
   screenshots: string[];
   video?: string;
+  sectionCmd?: string;
 }
 
 export const fullstackProjects: FullstackProject[] = [
